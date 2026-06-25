@@ -807,9 +807,13 @@
   .pv-semaforo{display:inline-block;width:8px;height:8px;border-radius:50%;flex-shrink:0}
   .pv-semaforo.ok{background:var(--ok)}
   .pv-semaforo.ng{background:#9aa0a6}
+  #pg-painel-vendas .wrap{align-items:start;grid-auto-flow:row}
+  #pg-painel-vendas header,
+  #pg-painel-vendas .pvf-panel,
+  #pg-painel-vendas .pv-tri{grid-column:1/-1}
 
   /* ===== FILTRO AVANÇADO PV ===== */
-  .pvf-panel{grid-column:1/-1;align-self:start;background:#fff;border:1px solid var(--trilho);border-radius:12px;padding:18px 20px;margin-bottom:16px}
+  .pvf-panel{align-self:start;height:auto;min-height:0;background:#fff;border:1px solid var(--trilho);border-radius:12px;padding:18px 20px;margin-bottom:0}
   .pvf-row{display:grid;gap:14px;margin-bottom:12px;align-items:end}
   .pvf-row-1{grid-template-columns:1.4fr 1.4fr 2fr 2fr}
   .pvf-row-2{grid-template-columns:1fr 1fr 1fr 1fr}
@@ -833,7 +837,7 @@
   }
 
   /* ===== PAINEL TRI-COLUNA (Indicadores | Ranking | Serviços) ===== */
-  .pv-tri{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.25fr 1.1fr;margin-bottom:16px;border:1px solid var(--trilho);border-radius:12px;background:#fff;overflow:hidden}
+  .pv-tri{display:grid;grid-template-columns:1fr 1.25fr 1.1fr;margin-bottom:16px;border:1px solid var(--trilho);border-radius:12px;background:#fff;overflow:hidden}
   .pv-tri-col{padding:14px 16px;border-right:1px solid var(--trilho);min-width:0}
   .pv-tri-col:last-child{border-right:none}
   @media(max-width:1200px){
