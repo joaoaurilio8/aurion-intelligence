@@ -50,6 +50,7 @@
   .nav-item .ico svg{width:20px;height:20px}
   .nav-item .label{display:none}
   .sidebar:hover .nav-item .label{display:inline}
+  .nav-item.demo-hidden{display:none}
   .nav-foot{margin-top:auto;padding:8px;border-top:1px solid var(--line)}
 
   /* ---------- MAIN (ajustado ao lado da rail) ---------- */
@@ -958,6 +959,28 @@
   .ve-churn-narrative{background:var(--bg);border:1px solid var(--trilho);border-radius:10px;padding:14px 18px;margin-top:14px;font-size:13px;color:var(--tinta);font-weight:500;display:flex;align-items:center;gap:10px}
   .ve-churn-narrative b{color:var(--ok)}
   .ve-churn-narrative svg{flex:0 0 20px;color:var(--ok)}
+  .ve-demo-note{background:#fff;border:1px solid var(--trilho);border-left:4px solid var(--ok);border-radius:10px;padding:14px 18px;margin:12px 0 18px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .ve-demo-copy{min-width:0}
+  .ve-demo-eyebrow{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--ok);margin-bottom:3px}
+  .ve-demo-title{font-size:16px;font-weight:800;color:var(--tinta);line-height:1.25}
+  .ve-demo-sub{font-size:12px;color:var(--suave);line-height:1.45;margin-top:4px}
+  .ve-demo-action{border:0;background:var(--ok);color:#fff;border-radius:8px;padding:9px 13px;font:700 12px system-ui;cursor:pointer;white-space:nowrap}
+  .ve-demo-action:hover{background:#d96830}
+  .ve-proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .ve-proof{background:#fff;border:1px solid var(--trilho);border-radius:10px;padding:14px 16px}
+  .ve-proof-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;color:var(--suave);margin-bottom:5px}
+  .ve-proof-main{font-size:18px;font-weight:800;color:var(--tinta);font-variant-numeric:tabular-nums}
+  .ve-proof-sub{font-size:11px;color:var(--suave);line-height:1.45;margin-top:4px}
+  .ve-next-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-top:16px}
+  .ve-next-list{display:grid;gap:8px}
+  .ve-next-item{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:var(--tinta);line-height:1.45}
+  .ve-next-num{width:20px;height:20px;border-radius:50%;background:#FFF3EE;color:var(--ok);font:800 10px system-ui;display:flex;align-items:center;justify-content:center;flex:0 0 20px}
+  .ve-next-box{background:var(--bg);border:1px solid var(--trilho);border-radius:10px;padding:14px}
+  .ve-next-box b{color:var(--tinta)}
+  @media(max-width:860px){
+    .ve-demo-note{align-items:flex-start;flex-direction:column}
+    .ve-proof-grid,.ve-next-grid{grid-template-columns:1fr}
+  }
   /* Breakdown serviços */
   .pv-serv-row{display:flex;align-items:center;gap:8px;margin-bottom:10px}
   .pv-serv-name{font-size:11px;font-weight:600;color:var(--tinta);width:90px;flex-shrink:0}
@@ -1333,11 +1356,11 @@
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="9" width="6" height="12" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg></span>
         <span class="label">Painel de Vendas</span>
       </a>
-      <a class="nav-item" data-topic="Crescimento" title="Crescimento">
+      <a class="nav-item demo-hidden" data-topic="Crescimento" title="Crescimento">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
         <span class="label">Crescimento</span>
       </a>
-      <a class="nav-item" data-topic="Churn Rate" title="Churn Rate">
+      <a class="nav-item demo-hidden" data-topic="Churn Rate" title="Churn Rate">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></span>
         <span class="label">Churn Rate</span>
       </a>
@@ -1391,8 +1414,35 @@
   <div id="pg-visao-exec" class="page">
     <h1 style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
       Visão Executiva
-      <span style="font-size:13px;font-weight:600;color:var(--suave);background:var(--bg);border-radius:20px;padding:3px 12px">Jun/2026 · 23 dias</span>
+      <span style="font-size:13px;font-weight:600;color:var(--suave);background:var(--bg);border-radius:20px;padding:3px 12px">Protótipo executivo · Jun/2026</span>
     </h1>
+
+    <section class="ve-demo-note">
+      <div class="ve-demo-copy">
+        <div class="ve-demo-eyebrow">Tese para diretoria comercial</div>
+        <div class="ve-demo-title">Um centro de comando B2C para decidir onde acelerar, corrigir e proteger receita.</div>
+        <div class="ve-demo-sub">Demo navegável com dados simulados a partir da estrutura mapeada no Waves e Power BI. A fase 2 conecta as fontes oficiais.</div>
+      </div>
+      <button class="ve-demo-action" onclick="showPage('Painel de Vendas')">Abrir operação</button>
+    </section>
+
+    <section class="ve-proof-grid">
+      <div class="ve-proof">
+        <div class="ve-proof-label">Decisão de relance</div>
+        <div class="ve-proof-main">5G, FTTH, combo e churn</div>
+        <div class="ve-proof-sub">Indicadores críticos juntos, sem alternar entre sistemas e relatórios.</div>
+      </div>
+      <div class="ve-proof">
+        <div class="ve-proof-label">Ação comercial</div>
+        <div class="ve-proof-main">ranking + filtros</div>
+        <div class="ve-proof-sub">Gerente, cidade, vendedor e nicho viram recortes operacionais imediatos.</div>
+      </div>
+      <div class="ve-proof">
+        <div class="ve-proof-label">Próxima fase</div>
+        <div class="ve-proof-main">integração de dados</div>
+        <div class="ve-proof-sub">Após validação, o mock é substituído por fontes oficiais e rotina de atualização.</div>
+      </div>
+    </section>
 
     <!-- KPI Strip -->
     <div class="ve-kpi-strip" id="ve-kpi-strip">
@@ -1510,6 +1560,24 @@
         Churn caiu de <b style="margin:0 4px">11,2%</b> (ago/25) para <b style="margin:0 4px">7,4%</b> (jun/26) — redução de 34% em 12 meses. Combo e portabilidade 5G são os principais fatores.
       </div>
     </div>
+
+    <section class="card" style="padding:20px">
+      <div class="ve-panel-title">
+        <span class="ve-panel-chip">FASE 2</span>
+        Plano de integração após validação
+      </div>
+      <div class="ve-next-grid">
+        <div class="ve-next-list">
+          <div class="ve-next-item"><span class="ve-next-num">1</span><span>Mapear fonte oficial por indicador: orçamentos, instalações, 5G, portabilidade, churn, metas e hierarquia comercial.</span></div>
+          <div class="ve-next-item"><span class="ve-next-num">2</span><span>Construir camada única de dados para substituir o mock sem redesenhar o painel.</span></div>
+          <div class="ve-next-item"><span class="ve-next-num">3</span><span>Publicar piloto com acesso controlado para diretoria, gerentes e coordenadores.</span></div>
+        </div>
+        <div class="ve-next-box">
+          <b>Critério de sucesso do protótipo:</b><br>
+          se a diretoria enxergar valor no fluxo de decisão, a próxima entrega vira integração e governança de dados, não mais design de tela.
+        </div>
+      </div>
+    </section>
   </div><!-- /pg-visao-exec -->
 
   <!-- ——— PAGE: Dados Gerais ——— -->
@@ -1991,7 +2059,7 @@
 
   <header>
     <h1>Painel de Vendas — <span id="pv-mes-label">Junho/2026</span></h1>
-    <span class="stamp">dados mock · atualizado hoje 08:00</span>
+    <span class="stamp">protótipo navegável · dados simulados · atualizado hoje 08:00</span>
   </header>
 
   <!-- Filtro avançado estilo Waves -->
@@ -3606,7 +3674,8 @@
   // Restaurar página salva ou default Dados Gerais
   (function(){
     var saved = localStorage.getItem('aurion_page');
-    showPage((saved && PAGE_MAP[saved]) ? saved : 'Dados Gerais');
+    var rotasDemo = ['Visão Executiva','Dados Gerais','Painel de Vendas','Churn Safra','Panorama Anual','Downloads','Feriados','Marketplace'];
+    showPage((saved && PAGE_MAP[saved] && rotasDemo.indexOf(saved) >= 0) ? saved : 'Visão Executiva');
   })();
 
   /* ====== VENDEDORES (mock gerado: 30 por gerência, G1–G11 = 330) ======
