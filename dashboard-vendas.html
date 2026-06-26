@@ -1385,6 +1385,10 @@
       <div class="brand" id="sb-brand"><span id="sb-name">AURION</span><small id="sb-sub">Painel de Vendas</small></div>
     </div>
     <nav>
+      <a class="nav-item" data-topic="Painel de Vendas" title="Painel de Vendas">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="9" width="6" height="12" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg></span>
+        <span class="label">Painel de Vendas</span>
+      </a>
       <a class="nav-item" data-topic="Visão Executiva" title="Visão Executiva">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/><line x1="2" y1="2" x2="22" y2="22" style="display:none"/></svg></span>
         <span class="label">Visão Executiva</span>
@@ -1392,10 +1396,6 @@
       <a class="nav-item" data-topic="Dados Gerais" title="Dados Gerais">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
         <span class="label">Dados Gerais</span>
-      </a>
-      <a class="nav-item" data-topic="Painel de Vendas" title="Painel de Vendas">
-        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="9" width="6" height="12" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg></span>
-        <span class="label">Painel de Vendas</span>
       </a>
       <a class="nav-item" data-topic="Crescimento" title="Crescimento">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
@@ -3719,7 +3719,7 @@
   (function(){
     var saved = localStorage.getItem('aurion_page');
     var rotasDemo = ['Visão Executiva','Dados Gerais','Painel de Vendas','Churn Safra','Panorama Anual','Downloads','Feriados','Marketplace'];
-    showPage((saved && PAGE_MAP[saved] && rotasDemo.indexOf(saved) >= 0) ? saved : 'Visão Executiva');
+    showPage((saved && PAGE_MAP[saved] && rotasDemo.indexOf(saved) >= 0) ? saved : 'Painel de Vendas');
   })();
 
   /* ====== VENDEDORES (mock gerado sobre hierarquia real capturada no PBI) ======
