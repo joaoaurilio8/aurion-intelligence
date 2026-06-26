@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Aurion BI">
 <meta name="format-detection" content="telephone=no">
@@ -56,6 +57,11 @@
   /* ---------- MAIN (ajustado ao lado da rail) ---------- */
   main{margin-left:var(--rail);padding:22px 26px;min-height:100vh}
   .wrap{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:640px){
+    :root{--rail:48px}
+    .sidebar:hover{width:var(--open);z-index:500}
+    .chat-panel{right:8px;bottom:8px;width:calc(100vw - 16px)}
+  }
   header{grid-column:span 2;display:flex;justify-content:space-between;align-items:center;position:relative}
   h1{font-size:20px;font-weight:700}
   .mes-drop-wrap{position:relative;display:inline-flex}
@@ -283,7 +289,7 @@
   .rk-btn svg{width:16px;height:16px;flex-shrink:0}
 
   /* ---------- TELA DE LOGIN ---------- */
-  .login-bg{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:200;transition:opacity .2s}
+  .login-bg{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:400;transition:opacity .2s}
   .login-bg.hidden{display:none}
   .login-box{background:#fff;border-radius:18px;padding:40px 38px 32px;width:380px;max-width:92vw;box-shadow:0 6px 32px rgba(0,0,0,.13);text-align:center}
   /* avatar: Brisanet (quadrado) → foto do usuário (círculo) */
@@ -300,6 +306,7 @@
   .login-field label{display:block;font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;font-weight:600}
   .login-field input{width:100%;font:15px system-ui;color:var(--tinta);background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;outline:none;transition:border-color .15s}
   .login-field input:focus{border-color:var(--ok);box-shadow:0 0 0 3px rgba(240,120,64,.12)}
+  .login-field input::placeholder{color:#b0b5bb;font-style:normal}
   .login-error{font-size:12px;color:var(--alerta);margin:-4px 0 12px;text-align:left;padding-left:2px}
   .login-btn{width:100%;padding:13px;background:var(--ok);color:#fff;font:600 15px system-ui;border:0;border-radius:10px;cursor:pointer;transition:background .15s;margin-top:4px}
   .login-btn:hover{background:#d96430}
@@ -731,9 +738,9 @@
   .pv-stage-label{font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.5px;font-weight:600;margin-top:3px}
   .pv-stage-pct{font-size:10px;color:var(--ok);font-weight:700;margin-top:4px}
   .pv-stage-sla{font-size:9px;padding:2px 7px;border-radius:10px;margin-top:6px;display:inline-block;font-weight:600}
-  .pv-stage-sla.ok{background:#FFF3EE;color:var(--ok)}
-  .pv-stage-sla.warn{background:#f1f3f4;color:var(--suave)}
-  .pv-stage-sla.alert{background:#e8eaed;color:var(--tinta)}
+  .pv-stage-sla.ok{background:#e8f5e9;color:#2e7d32}
+  .pv-stage-sla.warn{background:#fff8e1;color:#f57f17}
+  .pv-stage-sla.alert{background:#fce4e4;color:#c62828}
   .pv-stage-arrow{flex:0 0 28px;display:flex;align-items:center;justify-content:center;padding-top:8px;color:#c0c4c9;font-size:16px;align-self:flex-start}
   /* Tabela de vendas detalhada */
   .pv-venda-table{width:100%;border-collapse:collapse;font-size:11.5px}
@@ -1166,6 +1173,10 @@
   .mk-modal-close{position:absolute;top:10px;right:14px;z-index:10;background:rgba(0,0,0,.45);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:20px;border:none;cursor:pointer;line-height:1}
   /* ── Aurion AI bar ── */
   .ai-bar-wrap{display:flex;align-items:center;gap:6px;padding:4px 10px;background:var(--card);border:1px solid var(--trilho);border-radius:10px;width:320px;flex-shrink:0;position:absolute;left:50%;transform:translateX(-50%)}
+  @media(max-width:640px){
+    .ai-bar-wrap{position:static;transform:none;width:100%;margin-top:6px;left:auto}
+    header{flex-wrap:wrap;gap:4px}
+  }
   .ai-bar-icon{font-size:12px;flex-shrink:0;opacity:.45}
   .ai-bar-input{flex:1;border:none;padding:3px 6px;font:12px system-ui;color:var(--tinta);background:transparent;outline:none;min-width:0;height:24px}
   .ai-bar-input::placeholder{color:var(--suave);font-size:11.5px}
@@ -1244,6 +1255,27 @@
   .mk-send-dm:hover{opacity:.88}
   .mk-send-wa{background:#25d366;color:#fff;border:none;border-radius:10px;padding:12px;font:700 14px system-ui;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;transition:opacity .15s}
   .mk-send-wa:hover{opacity:.88}
+  /* SVG sizing — substitui emojis pelo padrão Feather do dash */
+  .ph-ico{display:flex;align-items:center;justify-content:center}
+  .ph-ico svg{width:36px;height:36px;display:block}
+  .confirm-ico{display:flex;align-items:center;justify-content:center}
+  .confirm-ico svg{width:36px;height:36px;display:block}
+  .cad-success .chk{display:flex;align-items:center;justify-content:center}
+  .cad-success .chk svg{width:52px;height:52px;display:block}
+  .dm-file-icon svg{width:22px;height:22px;vertical-align:middle;display:inline-block}
+  .mk-empty-ico{display:flex;align-items:center;justify-content:center}
+  .mk-empty-ico svg{width:48px;height:48px;display:block}
+  .aprov-av svg,.cad-mgmt-av svg{width:60%;height:60%}
+  .foto-simples-circle svg{width:64px;height:64px}
+  .pv-highlight-key svg{width:12px;height:12px;vertical-align:middle;display:inline-block;margin-right:3px;flex-shrink:0}
+  .foto-slot-btn svg{width:11px;height:11px;vertical-align:middle;display:inline-block;margin-right:2px}
+  .mk-act-btn svg,.mk-btn-criar-loja svg{width:12px;height:12px;vertical-align:middle;display:inline-block}
+  .mk-seller-name svg{width:13px;height:13px;vertical-align:middle;display:inline-block;margin-right:3px}
+  .badge-parc svg,.cs-tag.parc svg{width:10px;height:10px;vertical-align:middle;display:inline-block;margin-right:2px}
+  .stamp svg{width:11px;height:11px;vertical-align:middle;display:inline-block;margin-right:2px}
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  }
 </style>
 </head>
 <body>
@@ -1258,16 +1290,18 @@
       <p class="l-greeting" id="l-greeting"></p>
       <h2 class="login-title">Aurion</h2>
       <p class="login-sub">Business Intelligence</p>
+      <form id="l-form" novalidate>
       <div class="login-field">
-        <label>CPF</label>
+        <label for="l-cpf">CPF</label>
         <input id="l-cpf" type="text" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="username">
       </div>
       <div class="login-field">
-        <label>Senha</label>
-        <input id="l-senha" type="password" placeholder="••••••••" autocomplete="current-password">
+        <label for="l-senha">Senha</label>
+        <input id="l-senha" type="password" placeholder="Digite sua senha" autocomplete="current-password">
       </div>
       <div class="login-error" id="l-erro" style="display:none">CPF ou senha incorretos. Tente novamente.</div>
-      <button id="l-btn" class="login-btn">Entrar</button>
+      <button id="l-btn" type="submit" class="login-btn">Entrar</button>
+      </form>
       <button class="login-forgot" id="l-forgot">Esqueci Minha Senha</button>
       <hr class="login-divider">
       <button class="btn-cadastrar" id="btn-cadastrar">+ Cadastrar Colaborador</button>
@@ -1325,8 +1359,10 @@
       <button class="up-save" id="up-save">Salvar alterações</button>
       <div class="up-pw-toggle" id="up-pw-toggle">Alterar senha</div>
       <div class="up-pw-section" id="up-pw-section" style="display:none">
-        <div style="margin-bottom:8px"><div class="up-lab">Nova senha</div><input class="up-inp" id="up-pw1" type="password" placeholder="Nova senha" autocomplete="new-password"></div>
-        <div style="margin-bottom:4px"><div class="up-lab">Confirmar nova senha</div><input class="up-inp" id="up-pw2" type="password" placeholder="Confirme a nova senha" autocomplete="new-password"></div>
+        <form id="up-pw-form" novalidate>
+        <input type="text" name="username" id="up-pw-username" autocomplete="username" aria-hidden="true" style="display:none">
+        <div style="margin-bottom:8px"><div class="up-lab"><label for="up-pw1">Nova senha</label></div><input class="up-inp" id="up-pw1" type="password" placeholder="Nova senha" autocomplete="new-password"></div>
+        <div style="margin-bottom:4px"><div class="up-lab"><label for="up-pw2">Confirmar nova senha</label></div><input class="up-inp" id="up-pw2" type="password" placeholder="Confirme a nova senha" autocomplete="new-password"></div>
         <div class="up-pw-rules" id="up-pw-rules">
           <span class="up-pw-rule" id="upr-len">Mínimo 8 caracteres</span>
           <span class="up-pw-rule" id="upr-up">Letra maiúscula</span>
@@ -1336,7 +1372,8 @@
           <span class="up-pw-rule" id="upr-match">Senhas conferem</span>
         </div>
         <div class="up-pw-err" id="up-pw-err">As senhas não conferem ou não atendem os requisitos.</div>
-        <button class="up-save" id="up-pw-save" style="margin-top:10px">Salvar nova senha</button>
+        <button class="up-save" id="up-pw-save" type="submit" style="margin-top:10px">Salvar nova senha</button>
+        </form>
       </div>
     </div>
   </div>
@@ -1360,7 +1397,7 @@
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="9" width="6" height="12" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg></span>
         <span class="label">Painel de Vendas</span>
       </a>
-      <a class="nav-item demo-hidden" data-topic="Crescimento" title="Crescimento">
+      <a class="nav-item" data-topic="Crescimento" title="Crescimento">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
         <span class="label">Crescimento</span>
       </a>
@@ -1404,7 +1441,7 @@
         <span class="label">Aprovações</span>
         <span class="aprov-badge" id="aprov-badge"></span>
       </button>
-      <button class="nav-item nav-logout" id="btn-logout" title="Sair">
+      <button class="nav-item nav-logout" id="btn-logout" title="Sair" aria-label="Sair">
         <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
         <span class="label">Sair</span>
       </button>
@@ -1604,7 +1641,7 @@
         </div>
       </div></h1>
     <div class="ai-bar-wrap" id="ai-bar-wrap">
-      <span class="ai-bar-icon">✨</span>
+      <span class="ai-bar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
       <input class="ai-bar-input" id="ai-bar-input" placeholder="Perguntar ao Aurion AI…" autocomplete="off" maxlength="600">
       <button class="ai-bar-mic" id="ai-bar-mic" title="Falar pergunta">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
@@ -1616,7 +1653,7 @@
   </header>
   <div class="ai-response-panel" id="ai-response-panel">
     <div class="ai-response-header">
-      <span class="ai-response-label">✨ Aurion AI</span>
+      <span class="ai-response-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px;margin-bottom:1px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Aurion AI</span>
       <button class="ai-response-close" id="ai-response-close">×</button>
     </div>
     <div class="ai-response-content" id="ai-response-content"></div>
@@ -1697,7 +1734,7 @@
   <section class="card">
     <h3 id="acumulado-title">Acumulado — Receita (R$)</h3>
     <div class="sub" id="acumulado-sub">Real vs. meta no ritmo</div>
-    <svg id="acumulado-svg" viewBox="0 0 400 185" width="100%" height="auto" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Acumulado do mês"></svg>
+    <svg id="acumulado-svg" viewBox="0 0 400 185" width="100%" style="display:block" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Acumulado do mês"></svg>
     <div class="legend" id="acumulado-legend">
       <span class="dot" style="background:#F07840"></span>real
       <span class="dot" style="background:#9aa0a6"></span>meta
@@ -1747,13 +1784,13 @@
     <div class="sub">Clique no nome para ver o perfil · role para ver todos · <span class="count-badge" id="vcount"></span> · dados mock</div>
     <div class="filtros">
       <div class="fld"><label>Gerência</label>
-        <select id="f-ger"><option value="">Executiva</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option><option>G7</option><option>G8</option><option>G9</option><option>G10</option><option>G11</option></select></div>
+        <select id="f-ger"><option value="">Executiva</option></select></div>
       <div class="fld"><label>Coordenação</label>
         <select id="f-coord"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cidade</label>
         <select id="f-cidade"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cluster</label>
-        <select id="f-cluster"><option value="">Todos</option><option>A</option><option>B</option><option>C</option></select></div>
+        <select id="f-cluster"><option value="">Todos</option><option value="CAPITAIS">CAPITAIS</option><option value="CIDADES MÉDIAS">CIDADES MÉDIAS</option><option value="INTERIOR">INTERIOR</option></select></div>
       <div class="fld" style="justify-content:flex-end">
         <label>&nbsp;</label>
         <button class="bar-sort-btn" id="bar-sort">↓ Maior</button>
@@ -1794,7 +1831,7 @@
 
   <header>
     <h1>5G — Portabilidade · 2026</h1>
-    <span class="stamp">⚠️ dados mock · portabilidades = chips portados de outra operadora</span>
+    <span class="stamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> dados mock · portabilidades = chips portados de outra operadora</span>
   </header>
 
   <!-- KPI strip dinâmico -->
@@ -1808,13 +1845,13 @@
     <div class="sub">% de chips portados de outra operadora sobre total de chips vendidos no mês</div>
     <div class="filtros" style="margin-top:10px">
       <div class="fld"><label>Gerência</label>
-        <select id="cg-f-ger"><option value="">Executiva</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option><option>G7</option><option>G8</option><option>G9</option><option>G10</option><option>G11</option></select></div>
+        <select id="cg-f-ger"><option value="">Executiva</option></select></div>
       <div class="fld"><label>Coordenação</label>
         <select id="cg-f-coord"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cidade</label>
         <select id="cg-f-cidade"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cluster</label>
-        <select id="cg-f-cluster"><option value="">Todos</option><option>A</option><option>B</option><option>C</option></select></div>
+        <select id="cg-f-cluster"><option value="">Todos</option><option value="CAPITAIS">CAPITAIS</option><option value="CIDADES MÉDIAS">CIDADES MÉDIAS</option><option value="INTERIOR">INTERIOR</option></select></div>
     </div>
     <div id="cg-chart" style="margin-top:12px"></div>
     <div class="legend" style="margin-top:4px">
@@ -2043,19 +2080,19 @@
   </div><!-- /pg-feriados -->
 
   <!-- ——— PAGE: Vendas Criadas ——— -->
-  <div id="pg-ph-vc" class="page"><div class="pg-ph"><div class="ph-ico">📋</div><p>Vendas Criadas — em breve</p></div></div>
+  <div id="pg-ph-vc" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg></div><p>Vendas Criadas — em breve</p></div></div>
 
   <!-- ——— PAGE: Vendas Efetivadas ——— -->
-  <div id="pg-ph-ve" class="page"><div class="pg-ph"><div class="ph-ico">✅</div><p>Vendas Efetivadas — em breve</p></div></div>
+  <div id="pg-ph-ve" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><p>Vendas Efetivadas — em breve</p></div></div>
 
   <!-- ——— PAGE: Vendas Instaladas ——— -->
-  <div id="pg-ph-vi" class="page"><div class="pg-ph"><div class="ph-ico">📦</div><p>Vendas Instaladas — em breve</p></div></div>
+  <div id="pg-ph-vi" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><p>Vendas Instaladas — em breve</p></div></div>
 
   <!-- ——— PAGE: Crescimento ——— -->
-  <div id="pg-ph-cr" class="page"><div class="pg-ph"><div class="ph-ico">📈</div><p>Crescimento — em breve</p></div></div>
+  <div id="pg-ph-cr" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><p>Crescimento — em breve</p></div></div>
 
   <!-- ——— PAGE: Churn Rate ——— -->
-  <div id="pg-ph-chr" class="page"><div class="pg-ph"><div class="ph-ico">📉</div><p>Churn Rate — em breve</p></div></div>
+  <div id="pg-ph-chr" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><p>Churn Rate — em breve</p></div></div>
 
   <!-- ——— PAGE: Painel de Vendas ——— -->
   <div id="pg-painel-vendas" class="page">
@@ -2241,7 +2278,7 @@
       </div>
       <div class="pv-block">
         <h4>Evolução Mensal — Jan a Jun/26</h4>
-        <svg id="pv-trend-svg" viewBox="0 0 520 180" width="100%" height="auto" preserveAspectRatio="xMidYMid meet"></svg>
+        <svg id="pv-trend-svg" viewBox="0 0 520 180" width="100%" style="display:block" preserveAspectRatio="xMidYMid meet"></svg>
         <div class="pv-legend">
           <span class="pv-legend-item"><span class="pv-legend-dot" style="background:var(--ok)"></span>Criadas</span>
           <span class="pv-legend-item"><span class="pv-legend-dot" style="background:#9aa0a6"></span>Efetivadas</span>
@@ -2339,7 +2376,7 @@
 
   <header>
     <h1>Churn Safra — 2026</h1>
-    <span class="stamp">⚠️ dados mock · ref: instalações 4 meses atrás · meta ≤ 15% = 100%</span>
+    <span class="stamp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> dados mock · ref: instalações 4 meses atrás · meta ≤ 15% = 100%</span>
   </header>
 
   <!-- KPI strip (dinâmico) -->
@@ -2353,13 +2390,13 @@
     <div class="sub">Cada barra = cancelamentos ÷ instalados do mês de referência (4 meses antes)</div>
     <div class="filtros" style="margin-top:10px">
       <div class="fld"><label>Gerência</label>
-        <select id="cs-f-ger"><option value="">Executiva</option><option>G1</option><option>G2</option><option>G3</option><option>G4</option><option>G5</option><option>G6</option><option>G7</option><option>G8</option><option>G9</option><option>G10</option><option>G11</option></select></div>
+        <select id="cs-f-ger"><option value="">Executiva</option></select></div>
       <div class="fld"><label>Coordenação</label>
         <select id="cs-f-coord"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cidade</label>
         <select id="cs-f-cidade"><option value="">Todas</option></select></div>
       <div class="fld"><label>Cluster</label>
-        <select id="cs-f-cluster"><option value="">Todos</option><option>A</option><option>B</option><option>C</option></select></div>
+        <select id="cs-f-cluster"><option value="">Todos</option><option value="CAPITAIS">CAPITAIS</option><option value="CIDADES MÉDIAS">CIDADES MÉDIAS</option><option value="INTERIOR">INTERIOR</option></select></div>
     </div>
     <div id="cs-chart" style="margin-top:12px"></div>
     <div class="legend" style="margin-top:4px">
@@ -2440,7 +2477,7 @@
         <svg id="rk-fs-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
       </button>
       <div class="rk-head">
-        <h2>🏆 Ranking de Consultores</h2>
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:middle;margin-right:5px;margin-bottom:2px"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Ranking de Consultores</h2>
         <div class="rk-tabs" id="rk-tabs">
           <button class="rk-tab active" data-kpi="instaladas">Instaladas</button>
           <button class="rk-tab" data-kpi="criadas">Criadas</button>
@@ -2501,7 +2538,7 @@
   <!-- Modal confirmação de saída -->
   <div class="confirm-modal" id="confirm-logout-modal">
     <div class="confirm-box">
-      <div class="confirm-ico">👋</div>
+      <div class="confirm-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
       <h4>Deseja realmente sair?</h4>
       <p>Você será desconectado do Aurion.</p>
       <div class="confirm-btns">
@@ -2515,12 +2552,14 @@
   <div class="modal-bg" id="ai-key-overlay">
     <div class="modal ai-key-modal">
       <button class="mk-modal-close" id="ai-key-close" style="background:none;color:var(--suave)">×</button>
-      <div class="ai-key-title">✨ Configurar Aurion AI</div>
+      <div class="ai-key-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:middle;margin-right:5px;margin-bottom:2px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Configurar Aurion AI</div>
       <p class="ai-key-sub">Insira sua API Key do Groq para ativar o AI. A chave fica salva somente neste navegador.<br><br>Obtenha sua key <strong>gratuitamente</strong> em <strong>console.groq.com</strong> → API Keys → Create API key.</p>
+      <form id="ai-key-form" novalidate>
       <div class="mk-form-group">
-        <label>API Key do Groq</label>
+        <label for="ai-key-input">API Key do Groq</label>
         <input type="password" id="ai-key-input" placeholder="gsk_…" autocomplete="off" style="font-family:monospace;font-size:12px">
       </div>
+      </form>
       <div id="ai-key-status" style="font:12px system-ui;margin-bottom:12px;display:none"></div>
       <div class="ai-key-footer">
         <button class="mk-form-submit" id="ai-key-save">Salvar e fechar</button>
@@ -2591,7 +2630,7 @@
           USUARIOS[cpf] = saved[cpf];
           var toast = document.createElement('div');
           toast.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:'+(action==='approve'?'var(--ok)':'var(--alerta)')+';color:#fff;font:600 14px system-ui;padding:14px 28px;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.18);z-index:9999;white-space:nowrap;transition:opacity .4s';
-          toast.textContent = action==='approve' ? '✅ Acesso de '+nome+' aprovado com sucesso.' : '❌ Acesso de '+nome+' reprovado.';
+          toast.textContent = action==='approve' ? 'Acesso de '+nome+' aprovado.' : 'Acesso de '+nome+' reprovado.';
           document.body.appendChild(toast);
           setTimeout(function(){ toast.style.opacity='0'; setTimeout(function(){ toast.remove(); },500); },5000);
         }
@@ -2648,7 +2687,7 @@
       if(!pendentes.length){ list.innerHTML='<div class="aprov-empty">Nenhuma solicitação pendente.</div>'; return; }
       list.innerHTML = pendentes.map(function(u){
         var cpfFmt = (u.cpf||'').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4');
-        var av = u.foto ? '<img src="'+u.foto+'" alt="">' : '👤';
+        var av = u.foto ? '<img src="'+u.foto+'" alt="">' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
         return '<div class="aprov-card" id="ac-'+u.cpf+'">'+
           '<div class="aprov-av">'+av+'</div>'+
           '<div class="aprov-info">'+
@@ -2656,7 +2695,7 @@
             '<p class="aprov-det">'+
               (u.cargo||'—')+' · '+(u.cidade||'—')+'<br>'+
               'CPF '+cpfFmt+' · Nasc. '+(u.nasc||'—')+'<br>'+
-              (u.emailCorp?'✉ '+u.emailCorp+'<br>':'')+(u.contato?'📱 '+u.contato:'')+
+              (u.emailCorp?'✉ '+u.emailCorp+'<br>':'')+(u.contato?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:middle;margin-right:2px"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>'+u.contato:'')+
             '</p>'+
             '<div class="aprov-btns">'+
               '<button class="aprov-btn ok" data-act="approve" data-cpf="'+u.cpf+'">✓ Aprovar</button>'+
@@ -2732,13 +2771,13 @@
       });
       list.innerHTML = todos.map(function(u){
         var susp = u.status === 'suspenso';
-        var av = u.foto ? '<img src="'+u.foto+'" alt="">' : '👤';
+        var av = u.foto ? '<img src="'+u.foto+'" alt="">' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>';
         var cpfFmt = (u.cpf||'').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/,'$1.$2.$3-$4');
         var statusLabel = susp ? '<span class="cad-mgmt-status suspenso">Suspenso</span>' : '<span class="cad-mgmt-status ativo">Ativo</span>';
         var isProtegido = ADMINS.indexOf(u.cpf) >= 0;
         var btnAcao = susp
-          ? '<button class="cad-mgmt-btn reativar" data-act="reativar" data-cpf="'+u.cpf+'">↩ Reativar</button>'
-          : '<button class="cad-mgmt-btn suspender" data-act="suspender" data-cpf="'+u.cpf+'">⏸ Suspender</button>';
+          ? '<button class="cad-mgmt-btn reativar" data-act="reativar" data-cpf="'+u.cpf+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;vertical-align:middle;margin-right:3px"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>Reativar</button>'
+          : '<button class="cad-mgmt-btn suspender" data-act="suspender" data-cpf="'+u.cpf+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;vertical-align:middle;margin-right:3px"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>Suspender</button>';
         var acoes = isProtegido ? '' :
           '<div class="cad-mgmt-btns">'+btnAcao+
             '<button class="cad-mgmt-btn remover" data-act="remover" data-cpf="'+u.cpf+'">✕ Remover</button>'+
@@ -2770,11 +2809,11 @@
             if(card){ card.style.opacity='0'; setTimeout(function(){ renderCadastros(); },320); }
           }
           if(act === 'remover'){
-            pedirConfirmacao('🗑️','Remover cadastro?',
+            pedirConfirmacao('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>','Remover cadastro?',
               'O acesso de '+nome+' será removido permanentemente do sistema.',
               'Sim, remover','sair', executar);
           } else if(act === 'suspender'){
-            pedirConfirmacao('⏸️','Suspender acesso?',
+            pedirConfirmacao('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>','Suspender acesso?',
               nome+' não conseguirá mais fazer login até que o acesso seja reativado.',
               'Sim, suspender','sair', executar);
           } else {
@@ -2972,12 +3011,13 @@
     }
   })();
 
+  document.getElementById('l-form').addEventListener('submit', function(e){ e.preventDefault(); realizarLogin(); });
   document.getElementById('l-btn').addEventListener('click', realizarLogin);
   // Confirmação genérica para ações destrutivas
   var confirmActionModal = document.getElementById('confirm-action-modal');
   var _confirmCallback = null;
   function pedirConfirmacao(ico, titulo, msg, textoBtn, corBtn, callback){
-    document.getElementById('ca-ico').textContent   = ico;
+    document.getElementById('ca-ico').innerHTML   = ico;
     document.getElementById('ca-titulo').textContent = titulo;
     document.getElementById('ca-msg').textContent    = msg;
     var okBtn = document.getElementById('ca-ok');
@@ -3147,9 +3187,9 @@
         if(digits.length >= 10){
           const ddd = parseInt(digits.slice(0,2), 10);
           if(ddd < 11){
-            erroFone = '⚠ DDD inválido — verifique o código de área.';
+            erroFone = 'DDD inválido — verifique o código de área.';
           } else if(digits.length === 11 && digits[2] !== '9'){
-            erroFone = '⚠ Celular com 11 dígitos deve começar com 9 após o DDD.';
+            erroFone = 'Celular com 11 dígitos deve começar com 9 após o DDD.';
           }
         }
         if(phErr){ phErr.textContent = erroFone; phErr.style.display = erroFone ? 'block' : 'none'; }
@@ -3275,9 +3315,9 @@
             html += '<img src="'+fotos[i]+'" alt="'+lab+'"><button class="foto-remove" data-i="'+i+'">&times;</button>';
           } else {
             html += '<div class="foto-slot-btns">';
-            html += '<label class="foto-slot-btn" for="fcam-'+i+'">📷 Câmera</label>';
+            html += '<label class="foto-slot-btn" for="fcam-'+i+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Câmera</label>';
             html += '<input id="fcam-'+i+'" type="file" accept="image/*" capture="user" style="display:none">';
-            html += '<label class="foto-slot-btn" for="ffile-'+i+'">📁 Arquivo</label>';
+            html += '<label class="foto-slot-btn" for="ffile-'+i+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Arquivo</label>';
             html += '<input id="ffile-'+i+'" type="file" accept="image/*" style="display:none">';
             html += '</div>';
           }
@@ -3285,7 +3325,7 @@
         });
         html += '</div>';
         html += '<p class="foto-count"><b>'+qtd+'</b>/3 fotos adicionadas</p>';
-        html += '<button class="btn-gerar'+(qtd===3?' show':'')+'" id="btn-gerar">✨ Gerar Sua Foto Padrão</button>';
+        html += '<button class="btn-gerar'+(qtd===3?' show':'')+'" id="btn-gerar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Gerar Sua Foto Padrão</button>';
         cadBody.innerHTML = html;
         const lerFoto = function(i){ return function(e){
           const f = e.target.files && e.target.files[0];
@@ -3311,18 +3351,18 @@
         const fotoAtual = cadData.fotoSimples || null;
         const circleHtml = fotoAtual
           ? '<div class="foto-simples-circle tem-foto"><img src="'+fotoAtual+'" alt="preview"></div>'
-          : '<div class="foto-simples-circle">👤</div>';
+          : '<div class="foto-simples-circle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>';
         cadBody.innerHTML =
           '<div class="foto-simples-wrap">'+
             circleHtml+
             '<div class="foto-simples-btns">'+
-              '<label class="foto-slot-btn" for="fsimples-cam">📷 Câmera</label>'+
+              '<label class="foto-slot-btn" for="fsimples-cam"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> Câmera</label>'+
               '<input id="fsimples-cam" type="file" accept="image/*" capture="user" style="display:none">'+
-              '<label class="foto-slot-btn" for="fsimples-file">📁 Arquivo</label>'+
+              '<label class="foto-slot-btn" for="fsimples-file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg> Arquivo</label>'+
               '<input id="fsimples-file" type="file" accept="image/*" style="display:none">'+
             '</div>'+
             '<p class="foto-simples-hint">Envie uma foto focada no rosto — ela será usada como avatar no sistema.<br>Se a foto for de corpo inteiro, ajuste o enquadramento aproximando o rosto dentro do círculo.</p>'+
-            '<p class="foto-simples-warn" id="fsimples-warn">📸 Parece que é uma foto de corpo inteiro. Para melhor resultado, tire uma nova foto mais próxima do rosto ou faça um recorte antes de enviar.</p>'+
+            '<p class="foto-simples-warn" id="fsimples-warn">Parece que é uma foto de corpo inteiro. Para melhor resultado, tire uma nova foto mais próxima do rosto ou faça um recorte antes de enviar.</p>'+
             (fotoAtual ? '<button class="btn-finalizar" id="btn-simples-ok">Finalizar Cadastro</button>' : '')+
           '</div>';
 
@@ -3391,10 +3431,10 @@
           const errEl = document.getElementById('cpf-err');
           if(raw.length === 11){
             if(!validarCPF(raw)){
-              if(errEl){ errEl.textContent = '⚠ CPF inválido — verifique os números digitados.'; errEl.style.display = 'block'; }
+              if(errEl){ errEl.textContent = 'CPF inválido — verifique os números digitados.'; errEl.style.display = 'block'; }
               cadNext.disabled = true;
             } else if(USUARIOS[raw]){
-              if(errEl){ errEl.textContent = '⚠ CPF já cadastrado. Não é possível prosseguir com este CPF.'; errEl.style.display = 'block'; }
+              if(errEl){ errEl.textContent = 'CPF já cadastrado. Não é possível prosseguir com este CPF.'; errEl.style.display = 'block'; }
               cadNext.disabled = true;
             } else {
               if(errEl) errEl.style.display = 'none';
@@ -3422,13 +3462,13 @@
             const anoAtual = new Date().getFullYear();
             let erroDt = '';
             if(mm < 1 || mm > 12){
-              erroDt = '⚠ Mês inválido — informe um valor entre 01 e 12.';
+              erroDt = 'Mês inválido — informe um valor entre 01 e 12.';
             } else {
               const diasNoMes = new Date(yy, mm, 0).getDate();
               if(dd < 1 || dd > diasNoMes){
-                erroDt = '⚠ Dia inválido para o mês informado.';
+                erroDt = 'Dia inválido para o mês informado.';
               } else if(yy < 1920 || yy > anoAtual - 14){
-                erroDt = '⚠ Ano inválido — verifique o ano de nascimento.';
+                erroDt = 'Ano inválido — verifique o ano de nascimento.';
               }
             }
             if(erroDt){
@@ -3457,7 +3497,7 @@
       if(s.type === 'cpf'){
         const errEl = document.createElement('p');
         errEl.className = 'cpf-erro'; errEl.id = 'cpf-err';
-        errEl.textContent = '⚠ CPF já cadastrado. Não é possível prosseguir com este CPF.';
+        errEl.textContent = 'CPF já cadastrado. Não é possível prosseguir com este CPF.';
         cadBody.appendChild(errEl);
       }
       if(s.type === 'dateMask'){
@@ -3468,7 +3508,7 @@
       if(s.type === 'email'){
         const emailErrEl = document.createElement('p');
         emailErrEl.className = 'cpf-erro'; emailErrEl.id = 'email-err';
-        emailErrEl.textContent = '⚠ E-mail inválido — verifique o endereço digitado.';
+        emailErrEl.textContent = 'E-mail inválido — verifique o endereço digitado.';
         cadBody.appendChild(emailErrEl);
       }
       setTimeout(function(){ inp.focus(); }, 60);
@@ -3477,10 +3517,10 @@
         if(s.type === 'cpf'){
           const errEl = document.getElementById('cpf-err');
           if(raw.length === 11 && !validarCPF(raw)){
-            if(errEl){ errEl.textContent = '⚠ CPF inválido — verifique os números digitados.'; errEl.style.display = 'block'; }
+            if(errEl){ errEl.textContent = 'CPF inválido — verifique os números digitados.'; errEl.style.display = 'block'; }
             cadNext.disabled = true;
           } else if(raw.length === 11 && USUARIOS[raw]){
-            if(errEl){ errEl.textContent = '⚠ CPF já cadastrado. Não é possível prosseguir com este CPF.'; errEl.style.display = 'block'; }
+            if(errEl){ errEl.textContent = 'CPF já cadastrado. Não é possível prosseguir com este CPF.'; errEl.style.display = 'block'; }
             cadNext.disabled = true;
           } else {
             cadNext.disabled = raw.length < 11;
@@ -3500,11 +3540,11 @@
     const circle = document.createElement('div');
     circle.style.cssText = 'width:130px;height:130px;border-radius:50%;overflow:hidden;margin:0 auto;border:3px solid var(--ok)';
     if(dataUrl){ const img=new Image(); img.src=dataUrl; img.style.cssText='width:100%;height:100%;object-fit:cover'; circle.appendChild(img); }
-    else { circle.style.background='#e8eaed'; circle.style.display='flex'; circle.style.alignItems='center'; circle.style.justifyContent='center'; circle.style.fontSize='48px'; circle.textContent='👤'; }
+    else { circle.style.background='#e8eaed'; circle.style.display='flex'; circle.style.alignItems='center'; circle.style.justifyContent='center'; circle.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:64px;height:64px;opacity:.4"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'; }
     wrap.appendChild(circle);
     const msg = document.createElement('p');
     msg.className = 'res-msg';
-    msg.textContent = '✅ Foto adicionada com sucesso! Aguarda aprovação do RH.';
+    msg.textContent = 'Foto adicionada com sucesso! Aguarda aprovação do RH.';
     wrap.appendChild(msg);
     const btn = document.createElement('button');
     btn.className = 'btn-finalizar';
@@ -3568,7 +3608,7 @@
     wrap.appendChild(canvas);
     const msg = document.createElement('p');
     msg.className = 'res-msg';
-    msg.textContent = '✅ Foto padrão gerada com farda Brisanet! Aguarda aprovação do RH.';
+    msg.textContent = 'Foto padrão gerada com farda Brisanet! Aguarda aprovação do RH.';
     wrap.appendChild(msg);
     const btn = document.createElement('button');
     btn.className = 'btn-finalizar';
@@ -3610,7 +3650,7 @@
       }
       document.getElementById('cad-q').textContent = '';
       const nomeExib = cadData['nome']||'Colaborador';
-      cadBody.innerHTML = '<div class="cad-success"><div class="chk">✅</div><h3>Cadastro enviado!</h3><p>'+nomeExib+', seu cadastro foi registrado.<br><small style="color:var(--suave);font-size:12px;line-height:1.5;display:block;margin-top:6px">Aguardando aprovação do administrador.<br>O acesso será liberado após confirmação.</small></p></div>';
+      cadBody.innerHTML = '<div class="cad-success"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="var(--ok)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Cadastro enviado!</h3><p>'+nomeExib+', seu cadastro foi registrado.<br><small style="color:var(--suave);font-size:12px;line-height:1.5;display:block;margin-top:6px">Aguardando aprovação do administrador.<br>O acesso será liberado após confirmação.</small></p></div>';
       document.getElementById('cad-actions').style.display = 'none';
       cadBack.style.visibility = 'hidden';
       document.getElementById('cad-stepcount').textContent = '';
@@ -3682,9 +3722,9 @@
     showPage((saved && PAGE_MAP[saved] && rotasDemo.indexOf(saved) >= 0) ? saved : 'Visão Executiva');
   })();
 
-  /* ====== VENDEDORES (mock gerado: 30 por gerência, G1–G11 = 330) ======
-     João Aurilio entra como vendedor real (foto + dados) na G1.
-     O resto é fictício e determinístico. */
+  /* ====== VENDEDORES (mock gerado sobre hierarquia real capturada no PBI) ======
+     Fonte oficial capturada: 7 gerentes regionais.
+     Demais recortes ainda são simulados para navegação até integração com fonte oficial. */
   const PLANOS = [
     { nome:'Combo 500MB + 1 Chip',  valor:89.90 },
     { nome:'Combo 500MB + 2 Chips', valor:99.90 },
@@ -3730,19 +3770,45 @@
   const FIRST = ['Ana','Bruno','Carla','Diego','Eva','Felipe','Gabriela','Hugo','Igor','Júlia','Karen','Lucas','Marina','Nuno','Olívia','Paulo','Quésia','Rafael','Sofia','Tiago','Ulisses','Vera','Wagner','Xênia','Yara','Zeca','Beatriz','Caio','Daniela','Elisa'];
   const LAST  = ['Souza','Lima','Mendes','Rocha','Martins','Alves','Barros','Castro','Dias','Esteves','Farias','Gomes','Henriques','Ítalo','Jardim','Klein','Lopes','Moraes','Nunes','Oliveira','Pires','Queiroz','Ramos','Santos','Teixeira','Urias','Viana','Wolff','Ximenes','Zanon'];
   const LAST2 = ['da Silva','dos Santos','de Souza','Ferreira','Costa','Rodrigues','de Almeida','Nascimento','de Araújo','Pereira','de Melo','Cavalcante','Ribeiro','Carvalho','Corrêa','Cardoso','Magalhães','Monteiro','da Cunha','Pinto','de Macedo','Azevedo','Leite','Batista','de Andrade','Nogueira','Freitas','Medeiros','Cerqueira','Fontenele'];
-  const COORDS   = Array.from({length:30},  function(_,i){ return 'Coord '+(i+1); });
-  const CIDADES  = Array.from({length:160}, function(_,i){ return 'Cidade '+(i+1); });
-  const CLUSTERS = ['A','B','C'];
-  // G1: estrutura fixa — 3 coordenações, 40 cidades divididas entre elas
-  const G1_COORDS = ['Coord 1','Coord 2','Coord 3'];
-  const G1_COORD_CITIES = {
-    'Coord 1': Array.from({length:14}, function(_,i){ return 'Cidade '+(i+1); }),
-    'Coord 2': Array.from({length:13}, function(_,i){ return 'Cidade '+(i+15); }),
-    'Coord 3': Array.from({length:13}, function(_,i){ return 'Cidade '+(i+28); })
-  };
+  const HIERARQUIA_B2C = [
+    { key:'G1',  nome:'AIRTON SILVA',       coords:['METROPOLITANA FORTALEZA 1','METROPOLITANA FORTALEZA 2'], cidades:['Fortaleza/CE','Caucaia/CE','Maracanaú/CE','Eusébio/CE','Horizonte/CE','Pacajus/CE','Itaitinga/CE'] },
+    { key:'G2',  nome:'ALAN D.',            coords:['CEARA NORTE','IBIAPABA'],                                cidades:['Sobral/CE','Camocim/CE','Tianguá/CE','Ubajara/CE','Granja/CE','Santa Quitéria/CE','Massapê/CE'] },
+    { key:'G3',  nome:'ANDRE JEFTE',        coords:['CARIRI','VALE DO JAGUARIBE'],                            cidades:['Juazeiro do Norte/CE','Crato/CE','Barbalha/CE','Pereiro/CE','Limoeiro do Norte/CE','Campos Sales/CE'] },
+    { key:'G4',  nome:'CHRISTIANO ROBERTO', coords:['CEARA CENTRO','CEARA OESTE'],                            cidades:['Quixadá/CE','Itapipoca/CE','Nova Russas/CE','Guaraciaba do Norte/CE','Varjota/CE','Ipueiras/CE'] },
+    { key:'G5',  nome:'DAVI AGNELO',        coords:['RN LITORAL','SERIDO'],                                   cidades:['Natal/RN','Parnamirim/RN','Baia Formosa/RN','Goianinha/RN','Santa Cruz/RN','São Gonçalo do Amarante/RN'] },
+    { key:'G6',  nome:'VINICIUS GOMES',     coords:['MOSSORO','MOSSORO / VALE','ALTO OESTE'],                 cidades:['Mossoró/RN','Apodi/RN','Upanema/RN','Luis Gomes/RN','Jose da Penha/RN','Doutor Severiano/RN','Portalegre/RN','Martins/RN','Alto do Rodrigues/RN'] },
+    { key:'G7',  nome:'JECKSON DIOGO',      coords:['PARAIBA LITORAL','BORBOREMA'],                           cidades:['João Pessoa/PB','Campina Grande/PB','Cabedelo/PB','Rio Tinto/PB','Cruz do Espírito Santo/PB','Cachoeira dos Índios/PB'] },
+    { key:'G8',  nome:'LILYANE MEDEIROS',   coords:['PARAIBA SERTAO','PB SERTAO'],                            cidades:['Patos/PB','São Bento/PB','Cajazeiras/PB','Santa Luzia/PB','Pombal/PB','Sousa/PB'] },
+    { key:'G9',  nome:'FLAVIO FRANCO',      coords:['RECIFE NORTE','RECIFE SUL','PE LITORAL'],                cidades:['Recife/PE','Olinda/PE','Moreno/PE','Igarassu/PE','Jaboatão dos Guararapes/PE','Paulista/PE'] },
+    { key:'G10', nome:'ROMULO FERRALME',    coords:['PE AGRESTE','PE SERTAO','PE/PB SERTAO','PETROLINA'],     cidades:['Caruaru/PE','Taquaritinga do Norte/PE','Chã de Alegria/PE','Brejo da Madre de Deus/PE','Petrolina/PE','Garanhuns/PE'] },
+    { key:'G11', nome:'TIAGO BRASILEIRO',   coords:['PIAUI'],                                                 cidades:['Teresina/PI','Parnaíba/PI','Floriano/PI','Campo Maior/PI','Piripiri/PI','Picos/PI'] },
+    { key:'G12', nome:'JOSE MARIA',         coords:['ALAGOAS','MACEIO'],                                      cidades:['Maceió/AL','Arapiraca/AL','Palmeira dos Índios/AL','Marechal Deodoro/AL','Penedo/AL'] },
+    { key:'G13', nome:'GENECI',             coords:['BAHIA AGRESTE','BAHIA LITORAL'],                         cidades:['Dias Dávila/BA','Salvador/BA','Camaçari/BA','Feira de Santana/BA','Jequié/BA','Vitória da Conquista/BA'] },
+    { key:'G14', nome:'ROSE',               coords:['SERGIPE','CENTRO SUL'],                                  cidades:['Aracaju/SE','Lagarto/SE','Itabaiana/SE','Estância/SE','São Cristóvão/SE'] },
+    { key:'G15', nome:'EXECUTIVA',          coords:['FORTALEZA','METROPOLITANA FORTALEZA'],                   cidades:['Fortaleza/CE','Caucaia/CE','Maracanaú/CE','Eusébio/CE','Aquiraz/CE'] },
+    { key:'G16', nome:'F. HAYSLAN',         coords:['CEARA NORTE','IBIAPABA'],                                cidades:['Sobral/CE','Camocim/CE','Tianguá/CE','Ubajara/CE','Granja/CE'] },
+    { key:'G17', nome:'RAPHAEL GALDINO',    coords:['NOVOS NEGOCIOS','AGILITY','LOJA CREDENCIADA'],           cidades:['Fortaleza/CE','Natal/RN','Recife/PE','João Pessoa/PB','Teresina/PI'] },
+    { key:'G18', nome:'GER DONO CIDADE',    coords:['SEDE','4J','ABEL'],                                      cidades:['Fortaleza/CE','Caucaia/CE','Sobral/CE','Mossoró/RN','Campina Grande/PB'] },
+    { key:'G19', nome:'J. AURILIO',         coords:['FORTALEZA'],                                             cidades:['Fortaleza/CE','Caucaia/CE','Maracanaú/CE','Eusébio/CE'] }
+  ];
+  const GESTORES = HIERARQUIA_B2C.reduce(function(acc, g){ acc[g.key] = g.nome; return acc; }, {});
+  const GER_KEYS = HIERARQUIA_B2C.map(function(g){ return g.key; });
+  const HIER_BY_KEY = HIERARQUIA_B2C.reduce(function(acc, g){ acc[g.key] = g; return acc; }, {});
+  window.HIERARQUIA_B2C = HIERARQUIA_B2C;
+  window.GESTORES = GESTORES;
+  const COORDS   = HIERARQUIA_B2C.flatMap(function(g){ return g.coords; });
+  const CIDADES  = HIERARQUIA_B2C.flatMap(function(g){ return g.cidades; });
+  const CLUSTERS = ['CAPITAIS','CIDADES MÉDIAS','INTERIOR'];
+  const PV_CANAIS_HIER = ['PAP','PAP DC','LOJA','ONLINE','PARCEIROS','QUIOSQUE DC','QUIOSQUE INTERIOR','VAREJO VOLANTE','VAREJO REDES'];
+  const PV_TURMAS_HIER = ['EQUIPE PAP CE','EQUIPE PAP RN','EQUIPE PAP PE','EQUIPE PAP PB','EQUIPE LOJAS CE','EQUIPE ONLINE NE','EQUIPE PARCEIROS CE','EQUIPE QUIOSQUES CE'];
 
   // popula selects de coordenação e cidade via JS
   (function(){
+    ['f-ger','cg-f-ger','cs-f-ger'].forEach(function(id){
+      var sel = document.getElementById(id); if(!sel) return;
+      sel.innerHTML = '<option value="">Executiva</option>';
+      HIERARQUIA_B2C.forEach(function(g){ var o=document.createElement('option'); o.value=g.key; o.textContent=g.nome; sel.appendChild(o); });
+    });
     var coordSelIds  = ['f-coord','cg-f-coord','cs-f-coord'];
     var cidadeSelIds = ['f-cidade','cg-f-cidade','cs-f-cidade'];
     coordSelIds.forEach(function(id){
@@ -3757,12 +3823,6 @@
   const rnd = (s) => { const x = Math.sin(s*97.13)*10000; return x - Math.floor(x); };
   const dt = (s) => ('0'+(1+Math.floor(rnd(s)*28))).slice(-2)+'/'+('0'+(1+Math.floor(rnd(s+0.5)*12))).slice(-2)+'/'+(2018+Math.floor(rnd(s+0.9)*7));
 
-  const GESTORES = {
-    G1:'Júnior Pinheiro',  G2:'Fernanda Lima',    G3:'Carlos Mendes',
-    G4:'Adriana Costa',    G5:'Roberto Siqueira', G6:'Juliana Prado',
-    G7:'Eduardo Braga',    G8:'Patrícia Nogueira',G9:'Anderson Melo',
-    G10:'Cristina Furtado',G11:'Rogério Neto'
-  };
   const SUP_FIRST = ['Ricardo','Sandra','Leandro','Mônica','Fabrício','Tatiana','Sérgio','Renata','Cláudio','Vanessa','Augusto','Débora','Henrique','Simone','Vinícius','Larissa','Thiago','Camila','Bruno','Priscila','Rafael','Juliana','Diego','Aline','Marcos'];
   const SUP_LAST  = ['Siqueira','Barbosa','Almeida','Costa','Pereira','Dias','Ferreira','Carvalho','Santos','Oliveira','Ramos','Melo','Cardoso','Nogueira','Teixeira','Monteiro','Furtado','Braga','Cunha','Neto','Prado','Corrêa','Azevedo','Freitas','Ribeiro'];
   const genSup = (g, j) => { var si=(g-1)*6+Math.floor(j/5); return { nome:SUP_FIRST[si%25]+' '+SUP_LAST[(si*7)%25], key:'sup-'+si }; };
@@ -3799,17 +3859,21 @@
   const genEndereco = (u, cidade) => {
     const rua = RUAS[Math.floor(rnd(u+7)*RUAS.length)];
     const num = 10 + Math.floor(rnd(u+8)*2490);
-    const uf  = ESTADOS[cidade] || 'CE';
-    return { rua:`${rua}, ${num}`, cidade:`${cidade} — ${uf}`, cep:fmtCEP(u) };
+    const partes = String(cidade || '').split('/');
+    const cidadeNome = partes[0] || cidade;
+    const uf  = partes[1] || ESTADOS[cidade] || 'CE';
+    return { rua:`${rua}, ${num}`, cidade:`${cidadeNome} — ${uf}`, cep:fmtCEP(u) };
   };
 
   var vendedores = [];
   var uid = 0;
-  for(let g=1; g<=11; g++){
+  for(let g=1; g<=GER_KEYS.length; g++){
+    const gKey = 'G'+g;
+    const hier = HIER_BY_KEY[gKey];
     for(let j=0; j<30; j++){
       uid++;
-      if(g===1 && j===0){
-        vendedores.push({ id:'joao', nome:'João Aurilio', nomeCompleto:'João Aurilio dos Santos Melo', ger:'G1', coord:'Coord 1', cidade:'Cidade 1', cluster:'A', supervisor:genSup(1,0).nome, supKey:genSup(1,0).key,
+      if(g===19 && j===0){
+        vendedores.push({ id:'joao', nome:'João Aurilio', nomeCompleto:'João Aurilio dos Santos Melo', ger:'G19', coord:hier.coords[0], cidade:hier.cidades[0], cluster:'CAPITAIS', supervisor:genSup(19,0).nome, supKey:genSup(19,0).key,
           receita:calcReceita(25,999), ticket:calcReceita(25,999)/25, foto:'fotos/joao-aurilio.jpg', cargo:'Consultor de Relacionamento',
           contratacao:'15/03/2022', churn:'10,2%', churnInst:49, churnCanc:5,
           porta5g: Math.round(31*(0.40*(0.8+rnd(999.44)*0.4))),
@@ -3822,25 +3886,27 @@
           cpf:'018.268.103-31',
           whatsapp:'(85) 9 2174 5240',
           endereco:'Rua Mogno, 133', endCidade:'Cajazeiras — Fortaleza, CE', cep:'60864-100',
-          gestorDireto:'Júnior Pinheiro'
+          gestorDireto:GESTORES.G19,
+          canal:'PAP', turma:'Turma 01'
         });
         continue;
       }
       const criadas = 12 + Math.floor(rnd(uid+0.1)*34);
       const efetivadas = Math.round(criadas*(0.80+rnd(uid+0.2)*0.18));
       const instaladas = Math.round(efetivadas*(0.78+rnd(uid+0.3)*0.18));
-      const coord = g===1 ? G1_COORDS[Math.floor(rnd(uid+0.33)*3)] : COORDS[Math.floor(rnd(uid+0.33)*30)];
-      const _g1cp = g===1 ? G1_COORD_CITIES[coord] : null;
-      const cidade = g===1 ? _g1cp[Math.floor(rnd(uid+0.55)*_g1cp.length)] : CIDADES[Math.floor(rnd(uid+0.55)*160)];
+      const coord = hier.coords[Math.floor(rnd(uid+0.33)*hier.coords.length)];
+      const cidade = hier.cidades[Math.floor(rnd(uid+0.55)*hier.cidades.length)];
       const end = genEndereco(uid, cidade);
       const churnPctNum = 4+rnd(uid+0.7)*12;
       const churnInst = 25+Math.floor(rnd(uid+0.85)*45);
       const churnCanc = Math.max(1, Math.round(churnInst*churnPctNum/100));
       vendedores.push({
-        id:'v'+uid, nome: FIRST[j] + ' ' + LAST[(j+g)%30], nomeCompleto: FIRST[j] + ' ' + LAST2[Math.floor(rnd(uid+0.66)*LAST2.length)] + ' ' + LAST[(j+g)%30], ger:'G'+g, supervisor:genSup(g,j).nome, supKey:genSup(g,j).key,
+        id:'v'+uid, nome: FIRST[j] + ' ' + LAST[(j+g)%30], nomeCompleto: FIRST[j] + ' ' + LAST2[Math.floor(rnd(uid+0.66)*LAST2.length)] + ' ' + LAST[(j+g)%30], ger:gKey, supervisor:genSup(g,j).nome, supKey:genSup(g,j).key,
         coord: coord, cidade, cluster: CLUSTERS[(j+g)%3],
+        canal: PV_CANAIS_HIER[(j+g)%PV_CANAIS_HIER.length],
+        turma: PV_TURMAS_HIER[(j+g)%PV_TURMAS_HIER.length],
         receita: calcReceita(instaladas,uid), ticket: calcReceita(instaladas,uid)/instaladas,
-        porta5g: Math.round(criadas*({A:.40,B:.30,C:.20}[CLUSTERS[(j+g)%3]]||.30)*(0.8+rnd(uid+0.44)*0.4)),
+        porta5g: Math.round(criadas*({'CAPITAIS':.40,'CIDADES MÉDIAS':.30,'INTERIOR':.20}[CLUSTERS[(j+g)%3]]||.30)*(0.8+rnd(uid+0.44)*0.4)),
         comboCount: calcChips5g(instaladas,uid).counts,
         comboChips: calcChips5g(instaladas,uid).chips,
         chipsAvulso: Math.max(0,Math.floor(rnd(uid+0.77)*8)),
@@ -3854,7 +3920,7 @@
         cpf: fmtCPF(uid),
         whatsapp: genWhatsapp(uid),
         endereco: end.rua, endCidade: end.cidade, cep: end.cep,
-        gestorDireto: GESTORES['G'+g]
+        gestorDireto: GESTORES[gKey]
       });
     }
   }
@@ -4235,10 +4301,10 @@
     var mode   = RK_MODES[_rkKpi];
     var data   = getRkData();
     var sorted = data.slice().sort(function(a,b){ return mode.val(b)-mode.val(a); }).slice(0,20);
-    document.querySelector('#rk-modal-inner .rk-head h2').textContent = '🏆 Ranking de '+LEVEL_LABELS[_rkLevel];
+    document.querySelector('#rk-modal-inner .rk-head h2').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:middle;margin-right:5px;margin-bottom:2px"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Ranking de '+LEVEL_LABELS[_rkLevel];
     var top3   = sorted.slice(0,3);
     var metals = ['rk-gold','rk-silver','rk-bronze'];
-    var crowns = ['🥇','🥈','🥉'];
+    var crowns = ['1','2','3'];
 
     // lista com avatar — nome completo
     document.getElementById('rk-list').innerHTML = sorted.map(function(v,i){
@@ -4248,7 +4314,7 @@
       var nome  = v.nomeCompleto || v.nome;
       var sub   = v.ger ? v.ger+' · '+v.coord : (v.count ? v.count+' consultores' : '');
       return '<div class="rk-row '+metal+'">'+
-        '<span class="rk-pos">'+(i===0?'🥇':i===1?'🥈':i===2?'🥉':'#'+(i+1))+'</span>'+
+        '<span class="rk-pos">'+(i<3?crowns[i]:'#'+(i+1))+'</span>'+
         '<div class="rk-av" style="background:'+color+'">'+avHtml(v)+'</div>'+
         '<span class="rk-rname">'+nome+'<span class="rk-rsub">'+sub+'</span></span>'+
         '<span class="rk-rval">'+mode.fmt(val)+'</span>'+
@@ -4690,7 +4756,7 @@
     var byGer = gerSel ? vendedores.filter(function(v){ return v.ger===gerSel; }) : vendedores;
     var uCoords = [];
     byGer.forEach(function(v){ if(uCoords.indexOf(v.coord)<0) uCoords.push(v.coord); });
-    uCoords.sort(function(a,b){ return parseInt(a.replace('Coord ',''))-parseInt(b.replace('Coord ','')); });
+    uCoords.sort(function(a,b){ return a.localeCompare(b, 'pt-BR'); });
     coordEl.innerHTML = '<option value="">Todas</option>';
     uCoords.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; coordEl.appendChild(o); });
     if(uCoords.indexOf(prevCoord)>=0) coordEl.value=prevCoord;
@@ -4698,7 +4764,7 @@
     var byCoord  = coordNow ? byGer.filter(function(v){ return v.coord===coordNow; }) : byGer;
     var uCids = [];
     byCoord.forEach(function(v){ if(uCids.indexOf(v.cidade)<0) uCids.push(v.cidade); });
-    uCids.sort(function(a,b){ return parseInt(a.replace('Cidade ',''))-parseInt(b.replace('Cidade ','')); });
+    uCids.sort(function(a,b){ return a.localeCompare(b, 'pt-BR'); });
     cidEl.innerHTML = '<option value="">Todas</option>';
     uCids.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c; cidEl.appendChild(o); });
     if(uCids.indexOf(prevCid)>=0) cidEl.value=prevCid;
@@ -5151,7 +5217,7 @@
     // linha 5G
     var pts5g = vals.map(function(v,i){ return xOf(i).toFixed(1)+','+yOf(v).toFixed(1); }).join(' ');
     // área fill
-    var area5g = 'M'+xOf(0).toFixed(1)+','+BOT+' L'+pts5g.split(' ').map(function(p,i){ return (i===0?'L':'')+p; }).join(' L')+' L'+xOf(meses.length-1).toFixed(1)+','+BOT+' Z';
+    var area5g = 'M'+xOf(0).toFixed(1)+','+BOT+' L'+pts5g.split(' ').join(' L')+' L'+xOf(meses.length-1).toFixed(1)+','+BOT+' Z';
     // linha portabilidade (eixo secundário: 0-35%)
     var portMax=35;
     var yPort=function(v){ return BOT-(v/portMax)*(BOT-TOP); };
@@ -5274,7 +5340,7 @@
     const xOf = i => LEFT + i*SLOT + (SLOT-BAR_W)/2;
     const metaY = yOf(META_SAFRA);
     const MONTHS = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
-    let s = `<svg viewBox="0 0 460 215" width="100%" height="auto" preserveAspectRatio="xMidYMid meet">
+    let s = `<svg viewBox="0 0 460 215" width="100%" style="display:block" preserveAspectRatio="xMidYMid meet">
       <g stroke="#f1f3f4" stroke-width="1">
         <line x1="${LEFT}" y1="${BOT}" x2="${RIGHT}" y2="${BOT}"/>
         <line x1="${LEFT}" y1="${yOf(10).toFixed(1)}" x2="${RIGHT}" y2="${yOf(10).toFixed(1)}"/>
@@ -5299,7 +5365,7 @@
         s += `<rect x="${x.toFixed(1)}" y="${yA.toFixed(1)}" width="${BAR_W}" height="${(BOT-yA).toFixed(1)}" fill="#F07840" rx="2"/>`;
         s += `<rect x="${x.toFixed(1)}" y="${yP.toFixed(1)}" width="${BAR_W}" height="${(yA-yP).toFixed(1)}" fill="rgba(240,120,64,.12)" stroke="#F07840" stroke-width="1.5" stroke-dasharray="3 2" rx="2"/>`;
         s += `<text x="${cx}" y="${(yP-4).toFixed(1)}" fill="#F07840" font-size="9" text-anchor="middle" font-weight="600">↗${fmtP(d.pctProj)}</text>`;
-        s += `<text x="${cx}" y="203" fill="#F07840" font-size="8" text-anchor="middle">⚠ ${d.diasDec}/${d.diasMes}d</text>`;
+        s += `<text x="${cx}" y="203" fill="#F07840" font-size="8" text-anchor="middle">▲ ${d.diasDec}/${d.diasMes}d</text>`;
       }
     });
     for(let i=6;i<12;i++){
@@ -5322,7 +5388,7 @@
       <div style="background:var(--bg);border-radius:8px;padding:14px 16px">
         <div style="font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:6px">Safra atual — Jun/26</div>
         <div style="font-size:28px;font-weight:700;color:var(--ok);font-variant-numeric:tabular-nums">${pa?fmtP(pa.pctAtual):'—'}</div>
-        <div style="font-size:12px;color:var(--suave);margin-top:3px">proj: <span style="color:${projOk?'var(--ok)':'var(--alerta)'};font-weight:600">${pa?fmtP(pa.pctProj):'—'}</span> <span class="badge-parc">⚠ ${pa?pa.diasDec+'/'+pa.diasMes:''} dias</span></div>
+        <div style="font-size:12px;color:var(--suave);margin-top:3px">proj: <span style="color:${projOk?'var(--ok)':'var(--alerta)'};font-weight:600">${pa?fmtP(pa.pctProj):'—'}</span> <span class="badge-parc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> ${pa?pa.diasDec+'/'+pa.diasMes:''} dias</span></div>
       </div>
       <div style="background:var(--bg);border-radius:8px;padding:14px 16px">
         <div style="font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:6px">Média 2026</div>
@@ -5363,7 +5429,7 @@
       </div>
       <div class="cs-insight">
         <div class="i-lab">Projeção Junho</div>
-        <div class="i-val" style="color:${projOk?'var(--ok)':'var(--alerta)'}">${pa?fmtP(pa.pctProj):'—'} — ${projOk?'dentro da meta':'⚠ acima da meta'}</div>
+        <div class="i-val" style="color:${projOk?'var(--ok)':'var(--alerta)'}">${pa?fmtP(pa.pctProj):'—'} — ${projOk?'dentro da meta':'acima da meta'}</div>
         <div class="i-sub">${pa?pa.diasMes-pa.diasDec:0} dias restantes no mês</div>
       </div>`;
   }
@@ -5386,7 +5452,7 @@
           <td class="r">${fmtN(d.canc)} <span style="font-size:10px;color:var(--suave)">(${d.diasDec}/${d.diasMes}d)</span></td>
           <td class="r"><span class="ok-pct">${fmtP(d.pctAtual)}</span> <span style="font-size:10px;color:var(--suave)">→ proj ${fmtP(d.pctProj)}</span></td>
           <td class="r" style="color:${projColor}">${vsStr}</td>
-          <td><span class="cs-tag parc">⚠ Parcial</span></td></tr>`;
+          <td><span class="cs-tag parc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Parcial</span></td></tr>`;
       }
     });
     rows.push(`<tr style="opacity:.5"><td>Jul→Dez/26</td><td>—</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td class="r">—</td><td><span class="cs-tag fut">Aguardando</span></td></tr>`);
@@ -5411,7 +5477,7 @@
   renderSafra();
 
   // ===== 5G — PORTABILIDADE =====
-  const CG_METAS = { A:40, B:30, C:20, '':30 };
+  const CG_METAS = { 'CAPITAIS':40, 'CIDADES MÉDIAS':30, 'INTERIOR':20, '':30 };
 
   const CG_BASE = [
     { chips:3200, ports:870,  pct:27.2, status:'fechado' },
@@ -5423,7 +5489,7 @@
   ];
 
   const CG_CLUSTER_BASE = {
-    A:[
+    'CAPITAIS':[
       { chips:1050, ports:294, pct:28.0, status:'fechado' },
       { chips:970,  ports:369, pct:38.0, status:'fechado' },
       { chips:1020, ports:316, pct:31.0, status:'fechado' },
@@ -5431,7 +5497,7 @@
       { chips:1000, ports:370, pct:37.0, status:'fechado' },
       { chips:780,  ports:257, pct:33.0, pctProj:38.0, diasDec:23, diasMes:30, status:'parcial' }
     ],
-    B:[
+    'CIDADES MÉDIAS':[
       { chips:1200, ports:324, pct:27.0, status:'fechado' },
       { chips:1100, ports:385, pct:35.0, status:'fechado' },
       { chips:1150, ports:299, pct:26.0, status:'fechado' },
@@ -5439,7 +5505,7 @@
       { chips:1150, ports:357, pct:31.0, status:'fechado' },
       { chips:890,  ports:249, pct:28.0, pctProj:31.0, diasDec:23, diasMes:30, status:'parcial' }
     ],
-    C:[
+    'INTERIOR':[
       { chips:950,  ports:238, pct:25.0, status:'fechado' },
       { chips:880,  ports:264, pct:30.0, status:'fechado' },
       { chips:930,  ports:223, pct:24.0, status:'fechado' },
@@ -5487,7 +5553,7 @@
       <div style="background:var(--bg);border-radius:8px;padding:14px 16px">
         <div style="font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:6px">Chips vendidos — Jun/26</div>
         <div style="font-size:28px;font-weight:700;color:var(--tinta);font-variant-numeric:tabular-nums">${pa?fmtN(pa.chips):'—'}</div>
-        <div style="font-size:12px;color:var(--suave);margin-top:3px"><span class="badge-parc">⚠ 23/30 dias</span></div>
+        <div style="font-size:12px;color:var(--suave);margin-top:3px"><span class="badge-parc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> 23/30 dias</span></div>
       </div>
       <div style="background:var(--bg);border-radius:8px;padding:14px 16px">
         <div style="font-size:10px;color:var(--suave);text-transform:uppercase;letter-spacing:.4px;font-weight:600;margin-bottom:6px">Portabilidades — Jun/26</div>
@@ -5516,7 +5582,7 @@
     const pa = data.find(function(d){ return d.status==='parcial'; });
     const pts = cl.map(function(d,i){ return xOf(i).toFixed(1)+','+yOf(d.pct).toFixed(1); }).join(' ');
 
-    let s = `<svg viewBox="0 0 460 195" width="100%" height="auto" preserveAspectRatio="xMidYMid meet">
+    let s = `<svg viewBox="0 0 460 195" width="100%" style="display:block" preserveAspectRatio="xMidYMid meet">
       <g stroke="#f1f3f4" stroke-width="1">`;
     [10,20,30,40,50].forEach(function(v){
       s+=`<line x1="${LEFT}" y1="${yOf(v).toFixed(1)}" x2="${RIGHT}" y2="${yOf(v).toFixed(1)}"/>`;
@@ -5554,8 +5620,8 @@
   }
 
   function renderCGBreakdown(){
-    const clusters  = ['A','B','C'];
-    const labels    = ['Grandes cidades','Médias cidades','Pequenas cidades'];
+    const clusters  = ['CAPITAIS','CIDADES MÉDIAS','INTERIOR'];
+    const labels    = ['Capitais','Cidades médias','Interior'];
     const metas     = [40, 30, 20];
     const MAX=50;
     const html = clusters.map(function(cl,i){
@@ -5608,7 +5674,7 @@
           <td class="r"><span class="${d.pct>=meta?'ok-pct':'fail-pct'}">${fmtP(d.pct)}</span> <span style="font-size:10px;color:var(--suave)">→ proj ${fmtP(d.pctProj)}</span></td>
           <td class="r">${meta}%</td>
           <td class="r" style="color:${projOk?'var(--ok)':'var(--alerta)'}">${vsStr}</td>
-          <td><span class="cs-tag parc">⚠ Parcial</span></td></tr>`;
+          <td><span class="cs-tag parc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg> Parcial</span></td></tr>`;
       }
     });
     document.getElementById('cg-tbody').innerHTML=rows.join('');
@@ -5637,10 +5703,10 @@
   var _pvServico = 'todos';
 
   /* --- Dados extras para filtros avançados --- */
-  var PV_NICHOS    = ['PAP DC','PAP Residencial','Loja Física','Mídia Digital','Televendas'];
+  var PV_NICHOS    = ['PAP DC','PAP','LOJA','ONLINE','TELEVENDAS','PARCEIROS','QUIOSQUE DC','VAREJO REDES','ONLINE - CVD'];
   var PV_LIDERES   = ['Ana Beatriz Santos','Carlos Viana Neto','Joice Mendes Leal','Lucas Porto Silva','Priscila Rocha Cruz'];
-  var PV_GRUPOS    = ['Grupo Alpha','Grupo Beta','Grupo Gama','Grupo Delta','Grupo Épsilon','Grupo Zeta'];
-  var PV_INTEGR    = ['Integrador Norte','Integrador Sul','Integrador Leste','Integrador Oeste','Integrador Centro'];
+  var PV_GRUPOS    = ['EMBAIXADORES BRISA','AGIL TELECOMUNICACAO LTDA','GALVAO TELECOMUNICACOES','LOJA FORTALEZA/CE WS','HOPE TELECOM','CONECT ULTRA','CONECTA MAIS TECNOLOGIA','PAP - FORTALEZA 5G 1'];
+  var PV_INTEGR    = ['AGILITY','BRISA PARTNER','INOVART','JOY TELECOM','NGC NATAL GRUPO','CONECTBOX','ISP E OPERADORAS'];
   var PV_PLANOS_FTTH_NOMES = ['OFERTA FIBRA 200MB ESSENCIAL','OFERTA FIBRA 400MB PLUS','OFERTA FIBRA 600MB PREMIUM','OFERTA FIBRA 800MB ULTRA','OFERTA FIBRA 1 GIGA MAX'];
   var PV_PLANOS_5G_NOMES   = ['OFERTA CHIP 5G 20GB','OFERTA CHIP 5G 40GB','OFERTA CHIP 5G 60GB','OFERTA CHIP 5G 100GB'];
   var PV_PLANOS_COMBO_NOMES= ['OFERTA BRISATUDO 200+20GB','OFERTA BRISATUDO 400+40GB','OFERTA BRISATUDO 600+60GB'];
@@ -6171,13 +6237,13 @@
       coordMap[c].ins+=v.instaladas;coordMap[c].ef+=v.efetivadas;
       coordMap[c].cr+=v.criadas;coordMap[c].metaIns+=v.metaInstaladas;
     });
-    var coordNames=Object.keys(coordMap).sort(function(a,b){ return parseInt(a.replace('Coord ',''))-parseInt(b.replace('Coord ','')); });
+    var coordNames=Object.keys(coordMap).sort(function(a,b){ return a.localeCompare(b, 'pt-BR'); });
     var maxCI=Math.max.apply(null,coordNames.map(function(c){return coordMap[c].ins;}))||1;
     var coordEl=document.getElementById('pv-coord');
     coordEl.innerHTML=coordNames.map(function(c){
       var d=coordMap[c];
       return '<div class="pv-coord-card">'+
-        '<div class="pv-coord-title">Coord. '+c+' · '+pct(d.ins,d.metaIns)+'% meta</div>'+
+        '<div class="pv-coord-title">'+c+' · '+pct(d.ins,d.metaIns)+'% meta</div>'+
         '<div class="pv-coord-row"><span class="pv-coord-metric">Instaladas</span><div class="pv-coord-track"><div class="pv-coord-fill" style="width:'+Math.round(d.ins/maxCI*100)+'%;background:var(--ok)"></div></div><span class="pv-coord-val">'+fmtN(d.ins)+'</span></div>'+
         '<div class="pv-coord-row"><span class="pv-coord-metric">Efetivadas</span><div class="pv-coord-track"><div class="pv-coord-fill" style="width:'+Math.round(d.ef/maxCI*100)+'%;background:#9aa0a6"></div></div><span class="pv-coord-val">'+fmtN(d.ef)+'</span></div>'+
         '<div class="pv-coord-row"><span class="pv-coord-metric">Criadas</span><div class="pv-coord-track"><div class="pv-coord-fill" style="width:'+Math.round(d.cr/maxCI*100)+'%;background:#c0c4c9"></div></div><span class="pv-coord-val">'+fmtN(d.cr)+'</span></div>'+
@@ -6242,11 +6308,11 @@
     } else {
       destEl.innerHTML='<div class="pv-highlight-box">'+
       '<div class="pv-highlight-title">Números do Mês</div>'+
-      '<div class="pv-highlight-item"><span class="pv-highlight-key">🏆 Mais instalações</span><span class="pv-highlight-val">'+topV.nome.split(' ')[0]+' ('+topV.instaladas+')</span></div>'+
-      '<div class="pv-highlight-item"><span class="pv-highlight-key">⚡ Melhor conversão</span><span class="pv-highlight-val">'+topE.nome.split(' ')[0]+' ('+Math.round(topE.instaladas/topE.criadas*100)+'%)</span></div>'+
-      '<div class="pv-highlight-item"><span class="pv-highlight-key">📋 Mais criadas</span><span class="pv-highlight-val">'+topC.nome.split(' ')[0]+' ('+topC.criadas+')</span></div>'+
-      '<div class="pv-highlight-item"><span class="pv-highlight-key">🔄 Taxa de conversão geral</span><span class="pv-highlight-val">'+pct(t.ins,t.cr)+'%</span></div>'+
-      '<div class="pv-highlight-item"><span class="pv-highlight-key">📱 Adoção 5G</span><span class="pv-highlight-val">'+pct5g+'%</span></div>'+
+      '<div class="pv-highlight-item"><span class="pv-highlight-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>Mais instalações</span><span class="pv-highlight-val">'+topV.nome.split(' ')[0]+' ('+topV.instaladas+')</span></div>'+
+      '<div class="pv-highlight-item"><span class="pv-highlight-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Melhor conversão</span><span class="pv-highlight-val">'+topE.nome.split(' ')[0]+' ('+Math.round(topE.instaladas/topE.criadas*100)+'%)</span></div>'+
+      '<div class="pv-highlight-item"><span class="pv-highlight-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>Mais criadas</span><span class="pv-highlight-val">'+topC.nome.split(' ')[0]+' ('+topC.criadas+')</span></div>'+
+      '<div class="pv-highlight-item"><span class="pv-highlight-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Taxa de conversão geral</span><span class="pv-highlight-val">'+pct(t.ins,t.cr)+'%</span></div>'+
+      '<div class="pv-highlight-item"><span class="pv-highlight-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Adoção 5G</span><span class="pv-highlight-val">'+pct5g+'%</span></div>'+
     '</div>';
     }
 
@@ -6528,7 +6594,7 @@
   <div class="chat-rz chat-rz-s"  id="rz-s"></div>
   <div class="chat-rz chat-rz-e"  id="rz-e"></div>
   <div class="chat-head" id="chat-head">
-    <h3><span id="chat-title">💬 Chat Geral</span> <span id="chat-conn"></span></h3>
+    <h3><span id="chat-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px;margin-bottom:1px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Geral</span> <span id="chat-conn"></span></h3>
     <div class="chat-hbtns">
       <button class="chat-hmin" id="chat-search-btn" title="Buscar membro" style="font-size:13px">
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -6707,7 +6773,7 @@
         :'<div class="chat-av-btn" data-cpf="'+escHtml(m.senderCpf||'')+'" data-nome="'+escHtml(m.sender||'')+'" data-foto="'+escHtml(m.foto||'')+'">'+
             '<div class="chat-av">'+av+'</div>'+
             '<div class="av-popover" id="pop-'+escHtml(m.senderCpf||m.key||'')+'">'+
-              '<button data-action="dm">💬 Mensagem privada</button>'+
+              '<button data-action="dm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px;vertical-align:middle;margin-right:3px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Mensagem privada</button>'+
             '</div>'+
           '</div>';
       html+='<div class="chat-msg'+(mine?' mine':'')+'">'+avEl+'<div class="chat-bubble">'+
@@ -6735,7 +6801,7 @@
         // Mudar para a aba Membros/DM
         document.getElementById('tab-members').classList.add('active');
         document.getElementById('tab-msgs').classList.remove('active');
-        setChatTitle('💬 Chat Privado');
+        setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado');
       });
     });
   }
@@ -6851,7 +6917,7 @@
     // Limpar notificação se DMs foram todos lidos
     if(_dmTotal===0&&_chatDmNotif){
       _chatDmNotif=false; chatPanel.classList.remove('dm-notif');
-      var te=document.getElementById('chat-title'); if(te) te.textContent='💬 Chat Geral';
+      var te=document.getElementById('chat-title'); if(te) te.textContent='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Geral';
     }
   }
 
@@ -6864,7 +6930,7 @@
   function mkLimparChatDmNotif(){
     _chatDmNotif=false;
     chatPanel.classList.remove('dm-notif');
-    var te=document.getElementById('chat-title'); if(te) te.textContent='💬 Chat Geral';
+    var te=document.getElementById('chat-title'); if(te) te.textContent='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Geral';
   }
 
   function renderMembros(){
@@ -6948,22 +7014,23 @@
   }
 
   function fileIcon(mime){
-    if(!mime) return '📎';
-    if(mime.startsWith('image/')) return '🖼️';
-    if(mime.startsWith('video/')) return '🎬';
-    if(mime.startsWith('audio/')) return '🎵';
-    if(mime.includes('pdf')) return '📄';
-    if(mime.includes('word')||mime.includes('document')) return '📝';
-    if(mime.includes('excel')||mime.includes('sheet')) return '📊';
-    if(mime.includes('zip')||mime.includes('rar')||mime.includes('7z')) return '🗜️';
-    return '📎';
+    var s='viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+    if(!mime) return '<svg '+s+'><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>';
+    if(mime.startsWith('image/')) return '<svg '+s+'><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+    if(mime.startsWith('video/')) return '<svg '+s+'><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>';
+    if(mime.startsWith('audio/')) return '<svg '+s+'><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>';
+    if(mime.includes('pdf')) return '<svg '+s+'><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>';
+    if(mime.includes('word')||mime.includes('document')) return '<svg '+s+'><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>';
+    if(mime.includes('excel')||mime.includes('sheet')) return '<svg '+s+'><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>';
+    if(mime.includes('zip')||mime.includes('rar')||mime.includes('7z')) return '<svg '+s+'><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg>';
+    return '<svg '+s+'><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>';
   }
 
   function renderDMmsgs(msgs){
     var el=document.getElementById('dm-msgs'); if(!el) return;
     var myCpf=window._usuarioLogado?window._usuarioLogado.cpf:null;
     var atBottom=el.scrollHeight-el.scrollTop-el.clientHeight<80;
-    if(!msgs.length){ el.innerHTML='<div class="chat-empty">Nenhuma mensagem ainda.<br>Mande uma! 💬</div>'; return; }
+    if(!msgs.length){ el.innerHTML='<div class="chat-empty">Nenhuma mensagem ainda.<br>Mande uma!</div>'; return; }
     var html='',lastDay='';
     msgs.forEach(function(m){
       var day=new Date(m.timestamp).toDateString();
@@ -7158,7 +7225,7 @@
     document.getElementById('tab-msgs').classList.add('active');
     document.getElementById('tab-members').classList.remove('active');
     showView('view-msgs');
-    setChatTitle('💬 Chat Geral');
+    setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Geral');
     setTimeout(function(){ document.getElementById('chat-input').focus(); },50);
   });
   document.getElementById('tab-members').addEventListener('click',function(){
@@ -7168,7 +7235,7 @@
     if(_dmListener&&_dmConvId){ db.ref('dms/'+_dmConvId+'/messages').off('value',_dmListener); _dmListener=null; }
     _dmCpf=null; _dmConvId=null;
     showView('view-members');
-    setChatTitle('💬 Chat Privado');
+    setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado');
     renderMembros();
   });
 
@@ -7360,7 +7427,7 @@
         mkLimparChatDmNotif();
         document.getElementById('tab-members').classList.add('active');
         document.getElementById('tab-msgs').classList.remove('active');
-        showView('view-members'); setChatTitle('💬 Chat Privado'); renderMembros();
+        showView('view-members'); setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado'); renderMembros();
       }
       return;
     }
@@ -7390,7 +7457,7 @@
         mkLimparChatDmNotif();
         document.getElementById('tab-members').classList.add('active');
         document.getElementById('tab-msgs').classList.remove('active');
-        showView('view-members'); setChatTitle('💬 Chat Privado'); renderMembros();
+        showView('view-members'); setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado'); renderMembros();
       }
     }
   });
@@ -7409,7 +7476,7 @@
         mkLimparChatDmNotif();
         document.getElementById('tab-members').classList.add('active');
         document.getElementById('tab-msgs').classList.remove('active');
-        showView('view-members'); setChatTitle('💬 Chat Privado'); renderMembros();
+        showView('view-members'); setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado'); renderMembros();
       }
     }
   });
@@ -7448,7 +7515,7 @@
       document.getElementById('tab-msgs').classList.remove('active');
       if(_dmListener&&_dmConvId){ db.ref('dms/'+_dmConvId+'/messages').off('value',_dmListener); _dmListener=null; }
       _dmCpf=null; _dmConvId=null;
-      showView('view-members'); setChatTitle('💬 Chat Privado'); renderMembros();
+      showView('view-members'); setChatTitle('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat Privado'); renderMembros();
       setTimeout(function(){ inp.focus(); },50);
     } else {
       fecharBusca();
@@ -7640,13 +7707,20 @@
   };
   var _mkCart = {storeId:null, storeName:'', storePhone:'', items:[]};
   // items: [{id, titulo, preco, imagem, qty}]
+  var _svgS='viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
   var MK_CATS = [
-    {ico:'📱',nome:'Eletrônicos'},{ico:'👗',nome:'Roupas'},{ico:'🛋️',nome:'Móveis'},
-    {ico:'🚗',nome:'Veículos'},{ico:'⚽',nome:'Esportes'},{ico:'🏠',nome:'Imóveis'},
-    {ico:'🍕',nome:'Alimentação'},{ico:'🛠️',nome:'Serviços'},{ico:'📦',nome:'Outros'}
+    {ico:'<svg '+_svgS+'><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',nome:'Eletrônicos'},
+    {ico:'<svg '+_svgS+'><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg>',nome:'Roupas'},
+    {ico:'<svg '+_svgS+'><path d="M20 9V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2"/><path d="M1 10l1 12h20l1-12H1"/><path d="M12 10v4"/></svg>',nome:'Móveis'},
+    {ico:'<svg '+_svgS+'><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',nome:'Veículos'},
+    {ico:'<svg '+_svgS+'><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>',nome:'Esportes'},
+    {ico:'<svg '+_svgS+'><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>',nome:'Imóveis'},
+    {ico:'<svg '+_svgS+'><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>',nome:'Alimentação'},
+    {ico:'<svg '+_svgS+'><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',nome:'Serviços'},
+    {ico:'<svg '+_svgS+'><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',nome:'Outros'}
   ];
   function mkEsc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function mkCatIco(cat){ var c=MK_CATS.find(function(x){return x.nome===cat;}); return c?c.ico:'📦'; }
+  function mkCatIco(cat){ var c=MK_CATS.find(function(x){return x.nome===cat;}); return c?c.ico:'<svg '+_svgS+'><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'; }
   function mkFmtPreco(p,neg){
     var n=parseFloat(String(p||'0').replace(',','.'));
     if(!n||n<=0) return 'Grátis';
@@ -7666,19 +7740,19 @@
       '<div class="mk-wrap">'+
         '<div class="mk-side">'+
           '<div class="mk-cat-label">Categorias</div>'+
-          '<button class="mk-cat-item active" data-cat="Todos"><span class="mk-cat-ico">🏪</span>Todos</button>'+
+          '<button class="mk-cat-item active" data-cat="Todos"><span class="mk-cat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Todos</button>'+
           MK_CATS.map(function(c){
             return '<button class="mk-cat-item" data-cat="'+mkEsc(c.nome)+'"><span class="mk-cat-ico">'+c.ico+'</span>'+mkEsc(c.nome)+'</button>';
           }).join('')+
           '<hr class="mk-divider">'+
           '<div class="mk-cond-label">Condição</div>'+
           '<button class="mk-cond-opt active" data-cond="Todos">Todos</button>'+
-          '<button class="mk-cond-opt" data-cond="Novo">✨ Novo</button>'+
-          '<button class="mk-cond-opt" data-cond="Usado">🔄 Usado</button>'+
+          '<button class="mk-cond-opt" data-cond="Novo">Novo</button>'+
+          '<button class="mk-cond-opt" data-cond="Usado">Usado</button>'+
         '</div>'+
         '<div class="mk-main">'+
           '<div class="mk-topbar">'+
-            '<h2>🏪 Marketplace</h2>'+
+            '<h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:middle;margin-right:5px;margin-bottom:2px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Marketplace</h2>'+
             '<div class="mk-search-wrap">'+
               '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="var(--suave)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>'+
               '<input id="mk-search" placeholder="Buscar produtos…" autocomplete="off">'+
@@ -7693,7 +7767,7 @@
             '<button class="mk-tab" data-mktab="lojas">Lojas</button>'+
             '<button class="mk-tab" data-mktab="meus">Meus Anúncios</button>'+
           '</div>'+
-          '<div id="mk-content"><div class="mk-empty"><div class="mk-empty-ico">🏪</div><p>Carregando…</p></div></div>'+
+          '<div id="mk-content"><div class="mk-empty"><div class="mk-empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><p>Carregando…</p></div></div>'+
         '</div>'+
       '</div>';
 
@@ -7755,7 +7829,7 @@
   function mkCardHtml(p, showDel){
     var imgHtml=p.imagens&&p.imagens[0]
       ?'<img src="'+mkEsc(p.imagens[0])+'" alt="">'
-      :'<div style="font-size:40px;color:var(--suave)">'+mkEsc(mkCatIco(p.categoria))+'</div>';
+      :'<div style="color:var(--suave);display:flex;align-items:center;justify-content:center;width:40px;height:40px">'+mkCatIco(p.categoria)+'</div>';
     var preco=mkFmtPreco(p.preco,p.negociavel);
     var isG=(preco==='Grátis');
     var bc=isG?'gratuito':(p.condicao==='Novo'?'novo':'usado');
@@ -7764,8 +7838,8 @@
     var actions=showDel
       ?'<div class="mk-card-actions">'+
           '<button class="mk-act-btn mk-act-sold'+(p.vendido?' ativo':'')+'" data-pid="'+mkEsc(p.id)+'" data-vendido="'+(p.vendido?'1':'0')+'">'+(p.vendido?'✓ Vendido':'Marcar vendido')+'</button>'+
-          '<button class="mk-act-btn mk-act-price" data-pid="'+mkEsc(p.id)+'" data-preco="'+(p.preco||0)+'">✏️ Preço</button>'+
-          '<button class="mk-act-btn mk-act-del" data-pid="'+mkEsc(p.id)+'">🗑️</button>'+
+          '<button class="mk-act-btn mk-act-price" data-pid="'+mkEsc(p.id)+'" data-preco="'+(p.preco||0)+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Preço</button>'+
+          '<button class="mk-act-btn mk-act-del" data-pid="'+mkEsc(p.id)+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></button>'+
         '</div>'
       :'';
     return '<div class="mk-card'+(p.vendido?' mk-card-vendido':'')+'" data-pid="'+mkEsc(p.id)+'" style="'+(p.vendido?'opacity:.7':'')+'">'+
@@ -7791,11 +7865,11 @@
       var lojas=Object.keys(_mkState.lojas).map(function(k){return Object.assign({id:k},_mkState.lojas[k]);}).filter(function(l){return l.active;});
       var btnHtml=myCpf
         ?'<div class="mk-criar-loja-wrap">'+(minhaLoja
-            ?'<button class="mk-btn-criar-loja" id="mk-btn-editar-loja">✏️ Editar minha loja</button>'
-            :'<button class="mk-btn-criar-loja" id="mk-btn-criar-loja">🏪 Criar minha loja</button>')+'</div>'
+            ?'<button class="mk-btn-criar-loja" id="mk-btn-editar-loja"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Editar minha loja</button>'
+            :'<button class="mk-btn-criar-loja" id="mk-btn-criar-loja"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Criar minha loja</button>')+'</div>'
         :'';
       if(!lojas.length){
-        el.innerHTML=btnHtml+'<div class="mk-empty"><div class="mk-empty-ico">🏪</div><p>Nenhuma loja ainda. Seja o primeiro a criar a sua!</p></div>';
+        el.innerHTML=btnHtml+'<div class="mk-empty"><div class="mk-empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><p>Nenhuma loja ainda. Seja o primeiro a criar a sua!</p></div>';
       } else {
         el.innerHTML=btnHtml+'<div class="mk-store-grid">'+lojas.map(function(l){
           var bs=l.banner?'background:url('+l.banner+') center/cover':'';
@@ -7803,7 +7877,7 @@
           var cnt=_mkState.produtos.filter(function(p){return p.active&&p.sellerCpf===l.id;}).length;
           var isMine=(myCpf&&l.id===myCpf);
           return '<div class="mk-store-card'+(isMine?' mk-store-mine':'')+'" data-lid="'+mkEsc(l.id)+'">'+
-            '<div class="mk-store-banner" style="'+bs+'">'+(!l.banner?mkEsc(mkCatIco(l.categoria)):'')+'</div>'+
+            '<div class="mk-store-banner" style="'+bs+'">'+(!l.banner?mkCatIco(l.categoria):'')+'</div>'+
             '<div class="mk-store-body">'+
               '<div class="mk-store-logo">'+li+'</div>'+
               '<div class="mk-store-name">'+mkEsc(l.nome)+(isMine?'<span class="mk-store-mine-badge">minha loja</span>':'')+'</div>'+
@@ -7822,9 +7896,9 @@
     }
 
     if(_mkState.tab==='meus'){
-      if(!myCpf){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico">🔒</div><p>Faça login para ver seus anúncios.</p></div>'; return; }
+      if(!myCpf){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><p>Faça login para ver seus anúncios.</p></div>'; return; }
       var meus=_mkState.produtos.filter(function(p){return p.sellerCpf===myCpf;});
-      if(!meus.length){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico">📦</div><p>Você ainda não tem anúncios.<br>Clique em <strong>Anunciar</strong> para publicar o primeiro!</p></div>'; return; }
+      if(!meus.length){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><p>Você ainda não tem anúncios.<br>Clique em <strong>Anunciar</strong> para publicar o primeiro!</p></div>'; return; }
       el.innerHTML='<div class="mk-grid">'+meus.map(function(p){return mkCardHtml(p,true);}).join('')+'</div>';
       el.querySelectorAll('.mk-card').forEach(function(c){
         c.addEventListener('click',function(e){ if(!e.target.closest('.mk-card-actions')) mkAbrirDetalhe(c.dataset.pid); });
@@ -7861,7 +7935,7 @@
 
     // tab: produtos
     var lista=mkFiltrar();
-    if(!lista.length){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico">🔍</div><p>Nenhum produto encontrado.</p></div>'; return; }
+    if(!lista.length){ el.innerHTML='<div class="mk-empty"><div class="mk-empty-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><p>Nenhum produto encontrado.</p></div>'; return; }
     el.innerHTML='<div class="mk-grid">'+lista.map(function(p){return mkCardHtml(p,false);}).join('')+'</div>';
     el.querySelectorAll('.mk-card').forEach(function(c){
       c.addEventListener('click',function(){
@@ -7887,11 +7961,11 @@
     var contato='';
     if(p.sellerCpf!==myCpf){
       contato='<div class="mk-contact-btns">';
-      if(myCpf) contato+='<button class="mk-btn-dm" id="mk-dm-btn">💬 Mensagem</button>';
+      if(myCpf) contato+='<button class="mk-btn-dm" id="mk-dm-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:3px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Mensagem</button>';
       if(p.telefone){
         var wa=p.telefone.replace(/\D/g,'');
         var wmsg=encodeURIComponent('Olá! Vi seu anúncio "'+p.titulo+'" no Aurion e tenho interesse.');
-        contato+='<a class="mk-btn-wa" href="https://wa.me/55'+wa+'?text='+wmsg+'" target="_blank" rel="noopener">📱 WhatsApp</a>';
+        contato+='<a class="mk-btn-wa" href="https://wa.me/55'+wa+'?text='+wmsg+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:3px"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>WhatsApp</a>';
       }
       contato+='</div>';
     }
@@ -7916,7 +7990,7 @@
           (p.descricao?'<div class="mk-detail-desc">'+mkEsc(p.descricao)+'</div>':'')+
           '<div class="mk-seller-box">'+
             '<div class="mk-seller-av">'+avHtml+'</div>'+
-            '<div><div class="mk-seller-name">'+(loja?'🏪 '+mkEsc(loja.nome):'👤 '+mkEsc(p.sellerName||'Vendedor'))+'</div>'+
+            '<div><div class="mk-seller-name">'+(loja?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>'+mkEsc(loja.nome):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>'+mkEsc(p.sellerName||'Vendedor'))+'</div>'+
             '<div class="mk-seller-info">'+mkEsc(mkTimeAgo(p.timestamp))+(p.views?' · '+p.views+' visualiz.':'')+'</div></div>'+
           '</div>'+
           contato+
@@ -7999,7 +8073,7 @@
       var n=totalItens();
       return '<div class="mk-sacola-bar" id="mk-sacola-bar">'+
         '<div>'+
-          '<div class="mk-sacola-label">🛒 '+n+' item'+(n!==1?'s':'')+' na sacola</div>'+
+          '<div class="mk-sacola-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>'+n+' item'+(n!==1?'s':'')+' na sacola</div>'+
           '<div class="mk-sacola-sub">'+mkEsc(mkFmtPreco(totalVal(),false))+'</div>'+
         '</div>'+
         '<button class="mk-sacola-cta">Ver pedido →</button>'+
@@ -8096,7 +8170,7 @@
     inner.innerHTML=
       '<div class="modal mk-form-modal">'+
         '<button class="mk-modal-close" id="mk-form-close" style="background:none;color:var(--suave)">×</button>'+
-        '<div class="mk-form-title">'+(isStoreProd?'🏪 Produto para '+mkEsc(storeCtx.nome):'📦 Criar Anúncio')+'</div>'+
+        '<div class="mk-form-title">'+(isStoreProd?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Produto para '+mkEsc(storeCtx.nome):'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>Criar Anúncio')+'</div>'+
         '<div class="mk-form-group">'+
           '<label>Fotos (até 5)</label>'+
           '<div class="mk-photos-upload" id="mk-thumbs"><div class="mk-photo-add" id="mk-add-photo">+</div></div>'+
@@ -8104,8 +8178,8 @@
         '</div>'+
         '<div class="mk-form-group"><label>Título *</label><input id="mk-f-titulo" placeholder="Ex: iPhone 13 Pro 256GB" maxlength="80"></div>'+
         '<div class="mk-form-row">'+
-          '<div class="mk-form-group"><label>Categoria *</label><select id="mk-f-cat">'+MK_CATS.map(function(c){return '<option value="'+mkEsc(c.nome)+'">'+c.ico+' '+mkEsc(c.nome)+'</option>';}).join('')+'</select></div>'+
-          '<div class="mk-form-group"><label>Condição *</label><select id="mk-f-cond"><option value="Novo">✨ Novo</option><option value="Usado">🔄 Usado</option></select></div>'+
+          '<div class="mk-form-group"><label>Categoria *</label><select id="mk-f-cat">'+MK_CATS.map(function(c){return '<option value="'+mkEsc(c.nome)+'">'+mkEsc(c.nome)+'</option>';}).join('')+'</select></div>'+
+          '<div class="mk-form-group"><label>Condição *</label><select id="mk-f-cond"><option value="Novo">Novo</option><option value="Usado">Usado</option></select></div>'+
         '</div>'+
         '<div class="mk-form-row">'+
           '<div class="mk-form-group"><label>Preço (R$) — 0 para Grátis</label><input id="mk-f-preco" type="number" min="0" step="0.01" placeholder="0,00"></div>'+
@@ -8218,7 +8292,7 @@
     var inner=document.getElementById('mk-modal-inner'); if(!inner) return;
     var logoData=existing&&existing.logo?[existing.logo]:[];
     var bannerData=existing&&existing.banner?[existing.banner]:[];
-    var titulo=existing?'✏️ Editar minha loja':'🏪 Criar minha loja';
+    var titulo=existing?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>Editar minha loja':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Criar minha loja';
 
     inner.innerHTML=
       '<div class="modal mk-form-loja-modal">'+
@@ -8259,7 +8333,7 @@
 
     function renderBannerBtn(){
       var b=document.getElementById('mk-banner-btn'); if(!b) return;
-      b.innerHTML=bannerData[0]?'<img src="'+mkEsc(bannerData[0])+'" style="width:100%;height:100%;object-fit:cover">':'🖼️';
+      b.innerHTML=bannerData[0]?'<img src="'+mkEsc(bannerData[0])+'" style="width:100%;height:100%;object-fit:cover">':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;opacity:.4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
     }
     renderBannerBtn();
 
@@ -8352,11 +8426,11 @@
     inner.innerHTML=
       '<div class="modal mk-checkout-modal">'+
         '<button class="mk-modal-close" id="mk-ck-close" style="background:none;color:var(--suave)">×</button>'+
-        '<div class="mk-checkout-title">🛒 Finalizar pedido</div>'+
+        '<div class="mk-checkout-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:middle;margin-right:4px"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>Finalizar pedido</div>'+
         '<div style="font:600 13px system-ui;color:var(--suave);margin-bottom:12px">'+mkEsc(storeName)+'</div>'+
         items.map(function(i){
           var sub=i.preco>0?mkFmtPreco(i.preco*i.qty,false):'Grátis';
-          var imgHtml=i.imagem?'<img src="'+mkEsc(i.imagem)+'" alt="">':'<span>📦</span>';
+          var imgHtml=i.imagem?'<img src="'+mkEsc(i.imagem)+'" alt="">':'<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;opacity:.4"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></span>';
           return '<div class="mk-checkout-item">'+
             '<div class="mk-checkout-img">'+imgHtml+'</div>'+
             '<div class="mk-checkout-info">'+
@@ -8369,8 +8443,8 @@
         (total>0
           ?'<div class="mk-checkout-total-box"><div class="mk-checkout-total-label">Total</div><div class="mk-checkout-total-val">'+mkEsc(mkFmtPreco(total,false))+'</div></div>'
           :'<div style="height:14px"></div>')+
-        (myCpf?'<button class="mk-send-dm" id="mk-ck-dm">💬 Enviar pedido via mensagem</button>':'')+
-        (waPhone?'<a class="mk-send-wa" href="https://wa.me/55'+mkEsc(waPhone)+'?text='+encodeURIComponent(orderMsg)+'" target="_blank" rel="noopener">📱 Enviar via WhatsApp</a>':'')+
+        (myCpf?'<button class="mk-send-dm" id="mk-ck-dm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enviar pedido via mensagem</button>':'')+
+        (waPhone?'<a class="mk-send-wa" href="https://wa.me/55'+mkEsc(waPhone)+'?text='+encodeURIComponent(orderMsg)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Enviar via WhatsApp</a>':'')+
         (!myCpf&&!waPhone?'<p style="color:var(--suave);font-size:13px;text-align:center;margin-top:12px">Entre em contato diretamente com a loja.</p>':'')+
       '</div>';
 
@@ -8410,7 +8484,7 @@
 
   var SYSTEM = 'Você é o Aurion AI, assistente inteligente do dashboard Aurion da Brisanet — operadora de telecomunicações do Nordeste do Brasil.\n\n'
     + 'O dashboard contém:\n'
-    + '- Vendas por gerência (G1–G11, ~30 vendedores cada)\n'
+    + '- Vendas por 19 gerentes capturados no Power BI: AIRTON SILVA, ALAN D., ANDRE JEFTE, CHRISTIANO ROBERTO, DAVI AGNELO, VINICIUS GOMES, JECKSON DIOGO, LILYANE MEDEIROS, FLAVIO FRANCO, ROMULO FERRALME, TIAGO BRASILEIRO, JOSE MARIA, GENECI, ROSE, EXECUTIVA, F. HAYSLAN, RAPHAEL GALDINO, GER DONO CIDADE e J. AURILIO\n'
     + '- Planos: Combo 500MB+1 Chip (R$89,90), Combo 500MB+2 Chips (R$99,90), Combo 700MB+1 Chip (R$109,90)\n'
     + '- Indicadores: Churn Rate mensal, análise por safra de clientes\n'
     + '- Panorama anual de performance por coordenador e gerência\n'
@@ -8434,7 +8508,7 @@
     var mesIdxAtual= window._aiMesIdx ? window._aiMesIdx() : 5;
     var mesAtual   = mesesFull[mesIdxAtual] || 'Junho/2026';
     var buildFn    = window._aiBuildMesData;
-    var GESTORES_AI= {G1:'Júnior Pinheiro',G2:'Fernanda Lima',G3:'Carlos Mendes',G4:'Adriana Costa',G5:'Roberto Siqueira',G6:'Juliana Prado',G7:'Eduardo Braga',G8:'Patrícia Nogueira',G9:'Anderson Melo',G10:'Cristina Furtado',G11:'Rogério Neto'};
+    var GESTORES_AI= window.GESTORES || {G1:'AIRTON SILVA',G2:'ALAN D.',G3:'ANDRE JEFTE',G4:'CHRISTIANO ROBERTO',G5:'DAVI AGNELO',G6:'VINICIUS GOMES',G7:'JECKSON DIOGO',G8:'LILYANE MEDEIROS',G9:'FLAVIO FRANCO',G10:'ROMULO FERRALME',G11:'TIAGO BRASILEIRO',G12:'JOSE MARIA',G13:'GENECI',G14:'ROSE',G15:'EXECUTIVA',G16:'F. HAYSLAN',G17:'RAPHAEL GALDINO',G18:'GER DONO CIDADE',G19:'J. AURILIO'};
 
     var ctx = '\n\n=== DADOS COMPLETOS DO DASHBOARD AURION — BRISANET ===';
     ctx += '\nPágina atual: "'+p+'" | Mês selecionado: '+mesAtual;
@@ -8515,11 +8589,11 @@
     // ── 4. TOTAIS POR CLUSTER ────────────────────────────────────
     var clMap={A:{ins:0,rec:0,cri:0,count:0},B:{ins:0,rec:0,cri:0,count:0},C:{ins:0,rec:0,cri:0,count:0}};
     vend.forEach(function(v){
-      var c=v.cluster||'A';
+      var c=v.cluster||'CAPITAIS';
       if(clMap[c]){ clMap[c].ins+=v.instaladas||0; clMap[c].rec+=v.receita||0; clMap[c].cri+=v.criadas||0; clMap[c].count++; }
     });
     ctx += '\n\n--- POR CLUSTER ---';
-    ['A','B','C'].forEach(function(c){
+    ['CAPITAIS','CIDADES MÉDIAS','INTERIOR'].forEach(function(c){
       var d=clMap[c];
       ctx += '\nCluster '+c+': Ins='+d.ins+' | Rec='+kbrl(d.rec)+' | Cri='+d.cri+' | Vendedores='+d.count;
     });
@@ -8574,7 +8648,7 @@
     ];
     safraBase.forEach(function(s){
       var taxaStr=s.status==='parcial'?s.pctAtual+'% atual (proj: '+s.pctProj+'%)':s.pct+'%';
-      var alerta=((s.pct||s.pctAtual||0)>15)?' ⚠ ACIMA DA META':'';
+      var alerta=((s.pct||s.pctAtual||0)>15)?' ACIMA DA META':'';
       ctx += '\n  Safra '+s.mes+' (ref: clientes de '+s.ref+'): '+s.inst+' instalações | '+s.canc+' cancelamentos | Churn='+taxaStr+alerta;
     });
     ctx += '\nSafra com maior churn: Mar/26 (18,3%) — acima da meta de 15%';
@@ -8590,7 +8664,7 @@
       {mes:'Jun/26',chips:2360,ports:660,pct:28.0,pctProj:31.2,status:'parcial'}
     ];
     ctx += '\n\n--- PORTABILIDADE 5G POR MÊS ---';
-    ctx += '\nMeta de portabilidade: Cluster A=40% | Cluster B=30% | Cluster C=20% | Geral=30%';
+    ctx += '\nMeta de portabilidade: CAPITAIS=40% | CIDADES MÉDIAS=30% | INTERIOR=20% | Geral=30%';
     cgBase.forEach(function(d){
       var pStr=d.status==='parcial'?d.pct+'% atual (proj: '+d.pctProj+'%)':d.pct+'%';
       ctx += '\n  '+d.mes+': '+d.chips+' chips | '+d.ports+' portabilidades | Taxa='+pStr;
@@ -8666,9 +8740,9 @@
       if(!res.ok){
         var apiMsg = (json.error && json.error.message) || ('Erro HTTP ' + res.status);
         var hint = '';
-        if(res.status === 401) hint = '<br><small>Key inválida — verifique em ⚙️ se copiou corretamente de <strong>console.groq.com</strong>.</small>';
+        if(res.status === 401) hint = '<br><small>Key inválida — verifique em Configurações se copiou corretamente de <strong>console.groq.com</strong>.</small>';
         if(res.status === 429) hint = '<br><small>Limite de requisições atingido. Aguarde alguns segundos e tente novamente.</small>';
-        var c2=getContent(); if(c2) c2.innerHTML='<span style="color:var(--alerta)">❌ '+apiMsg+'</span>'+hint;
+        var c2=getContent(); if(c2) c2.innerHTML='<span style="color:var(--alerta)">'+apiMsg+'</span>'+hint;
         return;
       }
 
@@ -8680,7 +8754,7 @@
 
     } catch(e){
       var c4=getContent();
-      if(c4) c4.innerHTML='<span style="color:var(--alerta)">❌ Erro: '+e.message+'</span>';
+      if(c4) c4.innerHTML='<span style="color:var(--alerta)">Erro: '+e.message+'</span>';
     } finally {
       _streaming = false;
       var b = document.getElementById('ai-bar-send');
