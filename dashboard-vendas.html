@@ -1453,10 +1453,12 @@
 
   <!-- ——— PAGE: Visão Executiva ——— -->
   <div id="pg-visao-exec" class="page">
-    <h1 style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+    <header style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+    <h1 style="display:flex;align-items:center;gap:10px;margin-bottom:0">
       Visão Executiva
       <span style="font-size:13px;font-weight:600;color:var(--suave);background:var(--bg);border-radius:20px;padding:3px 12px">Protótipo executivo · Jun/2026</span>
     </h1>
+    </header>
 
     <section class="ve-demo-note">
       <div class="ve-demo-copy">
@@ -2089,10 +2091,10 @@
   <div id="pg-ph-vi" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div><p>Vendas Instaladas — em breve</p></div></div>
 
   <!-- ——— PAGE: Crescimento ——— -->
-  <div id="pg-ph-cr" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><p>Crescimento — em breve</p></div></div>
+  <div id="pg-ph-cr" class="page"><header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><h1>Crescimento</h1></header><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div><p>Crescimento — em breve</p></div></div>
 
   <!-- ——— PAGE: Churn Rate ——— -->
-  <div id="pg-ph-chr" class="page"><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><p>Churn Rate — em breve</p></div></div>
+  <div id="pg-ph-chr" class="page"><header style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px"><h1>Churn Rate</h1></header><div class="pg-ph"><div class="ph-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div><p>Churn Rate — em breve</p></div></div>
 
   <!-- ——— PAGE: Painel de Vendas ——— -->
   <div id="pg-painel-vendas" class="page">
@@ -2435,7 +2437,11 @@
   </div><!-- /pg-churn-safra -->
 
   <!-- ——— PAGE: Marketplace ——— -->
-  <div id="pg-marketplace" class="page"></div>
+  <div id="pg-marketplace" class="page">
+    <header style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:4px">
+      <h1>Marketplace</h1>
+    </header>
+  </div>
 
   <!-- Modal Marketplace -->
   <div class="modal-bg" id="mk-overlay"><div id="mk-modal-inner"></div></div>
@@ -3700,7 +3706,7 @@
     localStorage.setItem('aurion_page', topic);
     // Restaurar layout salvo para esta página
     if(pg && window.restaurarLayout) window.restaurarLayout(pg.id);
-    // Move AI bar para o header da página ativa
+    // Move AI bar para o header da página ativa (fallback: topo da página)
     var bar  = document.getElementById('ai-bar-wrap');
     var resp = document.getElementById('ai-response-panel');
     if(bar && pg){
@@ -3708,6 +3714,9 @@
       if(hdr){
         hdr.appendChild(bar);
         hdr.parentNode.insertBefore(resp, hdr.nextSibling);
+      } else {
+        pg.insertBefore(resp, pg.firstChild);
+        pg.insertBefore(bar, pg.firstChild);
       }
     }
   }
